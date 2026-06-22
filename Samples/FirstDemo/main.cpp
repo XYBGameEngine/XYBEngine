@@ -1,8 +1,9 @@
 #include "TestApplication.h"
 
-int main() {
-    XYBEngine::UniquePtr<XYBEngine::TestApplication> application =
-        XYBEngine::UniquePtr<XYBEngine::TestApplication>(new XYBEngine::TestApplication());
-    application->Startup(); 
+using namespace XYBEngine;
+int main() {    
+    UniquePtr<TestApplication> application = UniquePtr<TestApplication>(std::make_unique<TestApplication>());
+    application->Startup();     
+    application->Shutdown();
     return 0;
 }
