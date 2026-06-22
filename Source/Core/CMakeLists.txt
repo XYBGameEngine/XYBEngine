@@ -1,4 +1,5 @@
 add_library(XYBCore 
+    Private/Log.cpp
     Private/ModuleManager.cpp
     Private/Engine.cpp 
     Private/LogModule.cpp
@@ -7,5 +8,9 @@ add_library(XYBCore
 target_compile_definitions(XYBCore PRIVATE XYB_LIB_BUILD)
 
 target_include_directories(XYBCore PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/Public
+    ${CMAKE_CURRENT_SOURCE_DIR}/Public  
+)
+
+target_link_libraries(XYBCore PUBLIC
+    spdlog
 )

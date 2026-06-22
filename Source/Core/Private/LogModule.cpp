@@ -3,13 +3,13 @@
 namespace XYBEngine
 {
     void LogModule::Startup()
-    {
-        std::cout << "LogModule startup" << std::endl;
+    { 
+        XYB_LOG_INFO("LogModule startup");
     }
 
     void LogModule::Shutdown()
-    {
-        std::cout << "LogModule shutdown" << std::endl;
+    { 
+        XYB_LOG_INFO("LogModule shutdown");
     }
 
     const char* LogModule::GetName() const

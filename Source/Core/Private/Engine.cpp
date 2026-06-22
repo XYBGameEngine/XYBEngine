@@ -4,14 +4,14 @@ namespace XYBEngine
 {
     void Engine::Startup()
     {
-        std::cout << "Engine startup" << std::endl; 
+        XYB_LOG_WARNING("Engine startup"); 
         ModuleManager::GetInstance().RegisterModule(std::make_unique<LogModule>());
         ModuleManager::GetInstance().StartupModules();
     }
 
     void Engine::Shutdown()
     {
-        std::cout << "Engine shutdown" << std::endl;
+        XYB_LOG_WARNING("Engine shutdown");
         ModuleManager::GetInstance().ShutdownModules();
     }
    

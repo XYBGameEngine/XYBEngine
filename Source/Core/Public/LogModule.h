@@ -2,7 +2,7 @@
 #define LOG_MODULE_H
 
 #include "IModule.h"
-#include <iostream>
+#include "Log.h"
 
 namespace XYBEngine
 {
