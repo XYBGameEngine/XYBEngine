@@ -19,4 +19,5 @@ add_executable(XYBGame
 
 target_link_libraries(XYBGame PRIVATE 
     XYBCore
+    XYBRuntime
 )

@@ -7,8 +7,7 @@ namespace XYBEngine
 {
     class TestApplication : public IApplication
     {
-    public:
-        TestApplication() : IApplication(UniquePtr<Engine>(new Engine())) {}
-        ~TestApplication() = default;
+    public: 
+        
     };
 }

@@ -11,19 +11,14 @@ namespace XYBEngine
         UniqueVectorPtr<IModule> m_modules;
     public:
         ModuleManager() = default;
-        ~ModuleManager() = default;
-        ModuleManager(const ModuleManager&) = delete;
-        ModuleManager& operator=(const ModuleManager&) = delete;
-
-        static ModuleManager& GetInstance(){
-            static ModuleManager s_instance;
-            return s_instance;
-        }
+        ~ModuleManager() = default; 
+ 
     public:
         void RegisterModule(UniquePtr<IModule> module);
         void UnregisterModule(UniquePtr<IModule> module);
         void StartupModules();
         void ShutdownModules();
+        void ClearModules();
     };    
 }
 

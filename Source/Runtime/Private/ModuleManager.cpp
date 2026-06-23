@@ -27,4 +27,9 @@ namespace XYBEngine
             (*it)->Shutdown();
         }
     }
+
+    void ModuleManager::ClearModules()
+    {
+        m_modules.clear();
+    }
 }
