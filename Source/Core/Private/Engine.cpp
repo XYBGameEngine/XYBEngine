@@ -14,5 +14,4 @@ namespace XYBEngine
         XYB_LOG_WARNING("Engine shutdown");
         ModuleManager::GetInstance().ShutdownModules();
     }
-   
-}       
+}

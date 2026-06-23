@@ -2,7 +2,6 @@
 
 namespace XYBEngine
 {
-
     void Log::SetLogLevel(spdlog::level::level_enum level)
     {
         spdlog::set_level(level);
