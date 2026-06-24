@@ -1,7 +1,8 @@
-#include "TestApplication.h"
+#include "Log.h"
 
 using namespace XYBEngine;
 
 int main() {     
-    return std::make_unique<TestApplication>() -> Run();
+    XYB_LOG_INFO("Hello, World!");
+    return 0;
 }
