@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <memory>
 #include <iostream>
+#include <utility>
 #include <vector>
 
 #if defined(XYB_SHARED_BUILD)
@@ -34,14 +35,20 @@ namespace XYBEngine
     template<class T>
     using UniquePtr = std::unique_ptr<T>;
 
-    template<class T>
-    using MakeUnique = std::make_unique<T>;
+    template<class T, class... Args>
+    UniquePtr<T> MakeUnique(Args&&... args)
+    {
+        return std::make_unique<T>(std::forward<Args>(args)...);
+    }
 
     template<class T>
     using SharedPtr = std::shared_ptr<T>;
 
-    template<class T>
-    using MakeShared = std::make_shared<T>;
+    template<class T, class... Args>
+    SharedPtr<T> MakeShared(Args&&... args)
+    {
+        return std::make_shared<T>(std::forward<Args>(args)...);
+    }
 
     template<class T>
     using WeakPtr = std::weak_ptr<T>;
