@@ -12,6 +12,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake")
 include(XYBHelpers)
 
+# 添加资源文件
+set(RESOURCE_FILES ${PROJECT_SOURCE_DIR}/UIResource/Resource.qrc)
+
 add_subdirectory(Source/Core) 
 add_subdirectory(ThirdParty/SPDLog)
 add_subdirectory(Source/Editor) 
@@ -21,6 +24,7 @@ message("-----------开始构建 XYBEngine 主项目 FirstDemo------------")
 #XYB_LIB_BUILD
 add_executable(XYBGame 
     Samples/FirstDemo/main.cpp
+    ${RESOURCE_FILES}
 )  
 
 target_link_libraries(XYBGame PRIVATE 

@@ -5,7 +5,8 @@ QtConsoleWindow::QtConsoleWindow(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::QtConsoleWindow)
 {
-    ui->setupUi(this);
+    ui->setupUi(this); 
+    QtHelper::SetStyleSheet(this, ":/Skin/Dark.skin");
 }
 
 QtConsoleWindow::~QtConsoleWindow()

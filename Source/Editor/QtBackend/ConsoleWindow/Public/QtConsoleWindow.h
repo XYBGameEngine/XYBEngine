@@ -2,6 +2,7 @@
 #define QTCONSOLEWINDOW_H
 
 #include <QWidget>
+#include "QtHelper.h"
 
 namespace Ui {
 class QtConsoleWindow;

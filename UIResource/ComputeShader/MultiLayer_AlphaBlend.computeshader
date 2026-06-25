@@ -1,0 +1,48 @@
+﻿#version 450
+
+layout(local_size_x = 1,local_size_y = 1,local_size_z = 1) in;
+
+layout (rgba8,binding = 0) uniform image2D InputUpLayer;
+layout (rgba8,binding = 1) uniform image2D InputDownLayer;
+layout (rgba8,binding = 2) uniform image2D ResultLayer;
+
+//融合后的图像：
+//C_a = 1 - (1 - alpha1) * ( 1 - alpha2)
+//C_r = A_r * alpha1 + B_r * alpha2 * (1-alpha1)
+//C_g = A_g * alpha1 + B_g * alpha2 * (1-alpha1)
+//C_b = A_b * alpha1 + B_b * alpha2 * (1-alpha1)
+
+//带上透明度后输出
+//C_r = C_r / C_a
+//C_g = C_g / C_a
+//C_b = C_b / C_a
+
+vec4 MultiLayerAlphaBlend(vec4 up,vec4 down)
+{
+    vec4 res = vec4(0,0,0,0);
+    float alpha1 = up.w;
+    float alpha2 = down.w;
+
+    res = up * alpha1 + down * alpha2 * (1 - alpha1);
+
+    res.w = 1 - (1 - alpha1) * ( 1 - alpha2);
+
+    res.w = res.w + 0.0001f;
+    res.x = res.x / res.w;
+    res.y = res.y / res.w;
+    res.z = res.z / res.w;
+
+    return res;
+}
+
+void main()
+{
+    ivec2 pos = ivec2(gl_GlobalInvocationID.xy);
+
+    vec4 colup = imageLoad(InputUpLayer,pos);
+    vec4 coldown = imageLoad(InputDownLayer,pos);
+
+    vec4 res = MultiLayerAlphaBlend(colup,coldown);
+
+    imageStore(ResultLayer,pos,res);
+}

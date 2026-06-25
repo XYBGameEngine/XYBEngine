@@ -1,0 +1,59 @@
+#version 450
+
+layout(local_size_x = 1,local_size_y = 1,local_size_z = 1) in;
+
+layout (rgba8,binding = 0) uniform image2D PenTexture;
+layout (rgba8,binding = 1) uniform image2D SelectedLayer;
+layout (rgba8,binding = 2) uniform image2D UpLayer;
+layout (rgba8,binding = 3) uniform image2D DownLayer;
+layout (rgba8,binding = 4) uniform image2D ResultLayer;
+
+uniform int Xoffset;
+uniform int Yoffset;
+uniform int Size;
+uniform vec4 Color;
+
+vec4 MultiLayerAlphaBlend(vec4 up,vec4 down)
+{
+    vec4 res = vec4(0,0,0,0);
+    float alpha1 = up.w;
+    float alpha2 = down.w;
+
+
+    res = up * alpha1 + down * alpha2 * (1 - alpha1);
+
+    res.w = 1 - (1 - alpha1) * ( 1 - alpha2);
+        res.w += 0.00001f;
+    res.x = res.x / res.w;
+    res.y = res.y / res.w;
+    res.z = res.z / res.w;
+
+    return res;
+}
+
+
+void main()
+{
+    ivec2 pos = ivec2(gl_GlobalInvocationID.xy);
+
+    vec4 colpen = imageLoad(PenTexture,pos);
+    colpen.xyz = Color.xyz;
+    pos.x = pos.x + Xoffset - Size / 2;
+    pos.y = pos.y + Yoffset - Size / 2;
+
+    vec4 colselected = imageLoad(SelectedLayer,pos);
+    vec4 colresult = imageLoad(ResultLayer,pos);
+    vec4 colup = imageLoad(UpLayer,pos);
+    vec4 coldown = imageLoad(DownLayer,pos);
+
+    vec4 resselected = MultiLayerAlphaBlend(colpen,colselected);
+
+    imageStore(SelectedLayer,pos,resselected);
+
+    vec4 res = MultiLayerAlphaBlend(colup,resselected);
+    res = MultiLayerAlphaBlend(res,coldown);
+
+    imageStore(ResultLayer,pos,res);
+
+    return;
+}

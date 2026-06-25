@@ -1,0 +1,275 @@
+/* QSS for Unreal Engine 5-like Theme */
+
+/* General Settings */
+* {
+    color: #c9d1d9; /* Light grey text */
+    background-color: #171717; /* Dark background */
+    selection-background-color: #306998; /* Blue selection background */
+    selection-color: #ffffff; /* White selection text */
+    border: none;
+}
+
+/* QWidget */
+QWidget {
+    border: none; /* Remove borders */
+}
+
+/* QMainWindow */
+QMainWindow {
+    background: #171717; /* Dark background */
+    border: none; /* Remove border */
+}
+
+/* QMenuBar */
+QMenuBar {
+    background-color: #222222;
+    color: #c9d1d9;
+}
+
+QMenuBar::item {
+    background-color: #222222;
+    color: #c9d1d9;
+}
+
+QMenuBar::item:selected {
+    background-color: #444444;
+}
+
+/* QMenu */
+QMenu {
+    background-color: #222222;
+    border: 1px solid #333333;
+}
+
+QMenu::item {
+    color: #c9d1d9;
+    background-color: #222222;
+    padding: 5px 30px; /* Keep padding for better item spacing */
+}
+
+QMenu::item:selected {
+    background-color: #444444;
+}
+
+/* QToolBar */
+QToolBar {
+    background: #212121;
+    border: none;
+}
+
+QToolButton {
+    background-color: #212121;
+    color: #c9d1d9;
+    border: none;
+}
+
+QToolButton:hover {
+    background-color: #333333;
+}
+
+QToolButton:pressed {
+    background-color: #444444;
+}
+
+/* QTabWidget */
+QTabWidget::pane {
+    border: none;
+}
+
+QTabBar::tab {
+    background: #212121;
+    color: #c9d1d9;
+    padding: 10px;
+}
+
+QTabBar::tab:selected {
+    background: #171717;
+    color: #ffffff;
+}
+
+QTabBar::tab:hover {
+    background: #306998;
+}
+
+/* QStatusBar */
+QStatusBar {
+    background: #222222;
+    color: #c9d1d9;
+}
+
+/* QPushButton - Keep original settings */
+QPushButton {
+    background-color: #3a3a3a;
+    color: #ffffff;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 3px;
+}
+
+QPushButton:hover {
+    background-color: #4a4a4a;
+}
+
+QPushButton:pressed {
+    background-color: #306998;
+}
+
+/* QDockWidget */
+QDockWidget {
+    background: #171717;
+}
+
+QDockWidget::title {
+    background: #212121;
+       text-align: left;
+       padding-left: 12px; /* 向左边增加填充以使文字居中 */
+       height: 20px;
+       color: #E0E0E0;
+}
+
+/* QLineEdit */
+QLineEdit {
+    background-color: #212121;
+    color: #c9d1d9;
+    border: 1px solid #3c3c3c;
+}
+
+/* QTextEdit */
+QTextEdit {
+    background-color: #171717;
+    color: #c9d1d9;
+    border: 1px solid #3c3c3c;
+}
+
+/* QComboBox */
+QComboBox {
+    background-color: #212121;
+    color: #c9d1d9;
+    border: none;
+}
+
+QComboBox::drop-down {
+    background-color: #212121;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #222222;
+    color: #c9d1d9;
+    border: 1px solid #3c3c3c;
+}
+
+/* QCheckBox */
+QCheckBox {
+    color: #c9d1d9;
+}
+
+QCheckBox::indicator {
+    width: 13px;
+    height: 13px;
+}
+
+QCheckBox::indicator:unchecked {
+    background-color: #555555;
+    border: 1px solid #555555;
+}
+
+QCheckBox::indicator:checked {
+    background-color: #306998;
+    border: none;
+    image: url(:/Texture/Texture/Checked.png);
+}
+
+/* QRadioButton */
+QRadioButton {
+    color: #c9d1d9;
+}
+
+QRadioButton::indicator {
+    width: 13px;
+    height: 13px;
+}
+
+QRadioButton::indicator:unchecked {
+    background-color: #555555;
+    border: 1px solid #555555;
+}
+
+QRadioButton::indicator:checked {
+    background-color: #306998;
+    border: none;
+}
+
+/* QScrollBar */
+QScrollBar:vertical {
+    background-color: #222222;
+    width: 10px;
+    margin: 20px 3px 20px 3px;
+    border: none;
+}
+
+QScrollBar::handle:vertical {
+    background-color: #3c3c3c;
+    min-height: 20px;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    background: #333333;
+    height: 20px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:vertical:hover, QScrollBar::sub-line:vertical:hover {
+    background: #444444;
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: #171717;
+}
+
+/* and similarly for QScrollBar::horizontal */
+
+/* QListView / QTreeView */
+/* QTreeView branch indicators */
+QListView, QTreeView {
+    background-color: #171717;
+    color: #c9d1d9;
+    border: 1px solid #3c3c3c;
+}
+
+QListView::item, QTreeView::item {
+    background-color: #171717;
+    color: #c9d1d9;
+}
+
+QListView::item:selected, QTreeView::item:selected {
+    background-color: #306998;
+    color: #ffffff;
+}
+
+/* QTableView */
+QTableView {
+    background-color: #171717;
+    color: #c9d1d9;
+    border: 1px solid #3c3c3c;
+    gridline-color: #333333;
+}
+
+QHeaderView::section {
+    background-color: #222222;
+    color: #c9d1d9;
+    border-left: 1px solid #444444;
+}
+
+/* QProgressBar */
+QProgressBar {
+    background-color: #3c3c3c;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+}
+
+QProgressBar::chunk {
+    background-color: #306998;
+}
