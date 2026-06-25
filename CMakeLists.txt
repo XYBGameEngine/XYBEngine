@@ -6,6 +6,9 @@ project(XYBEngine)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake")
+include(XYBHelpers)
+
 add_subdirectory(Source/Core) 
 add_subdirectory(ThirdParty/SPDLog)
 

@@ -1,6 +1,6 @@
-add_library(XYBCore 
-    Private/Log.cpp 
-)
+xyb_glob_cpp_sources(XYBCORE_SOURCES DIRS Private)
+
+add_library(XYBCore ${XYBCORE_SOURCES})
 
 target_include_directories(XYBCore PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/Public  
