@@ -2,6 +2,7 @@
 #define IEDITORFACTORY_H
 
 #include "Core.h"
+#include "IConsoleWindow.h"
 
 namespace XYBEngine
 {

@@ -1,4 +1,5 @@
 #include "IEditorFactory.h"
+#include "ConsoleWindow.h"
 
 namespace XYBEngine
 {

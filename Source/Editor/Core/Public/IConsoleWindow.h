@@ -11,6 +11,6 @@ namespace XYBEngine
         virtual ~IConsoleWindow() = default;
 
         virtual void ShowWindow() = 0; 
-    }
+    };
 }
 #endif // ICONSOLEWINDOW_H
