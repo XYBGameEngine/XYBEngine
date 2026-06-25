@@ -1,3 +1,3 @@
 x:
 cd x:/AXYBEngine 
-for /r "./Build/Debug" %%f in (*.exe) do "%%f" & pause
+for /r "./Build" %%f in (*.exe) do "%%f" & pause

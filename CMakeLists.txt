@@ -27,3 +27,5 @@ target_link_libraries(XYBGame PRIVATE
     XYBCore 
     XYBEditor
 )
+
+xyb_deploy_windows_runtime(XYBGame)
