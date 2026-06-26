@@ -6,7 +6,7 @@
 #include "IEditorWindow.h"
 
 namespace XYBEngine
-{
+{ 
     class XYB_API QtApplication : public IEditorWindow
     {
     private: 

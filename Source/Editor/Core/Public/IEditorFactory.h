@@ -2,8 +2,7 @@
 #define IEDITORFACTORY_H
 
 #include "Core.h"
-#include "IEditorWindow.h"
-#include "IEditorApplication.h"
+#include "IEditorWindow.h" 
 
 namespace XYBEngine
 {

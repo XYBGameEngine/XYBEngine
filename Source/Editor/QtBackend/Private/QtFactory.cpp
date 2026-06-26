@@ -11,11 +11,7 @@ namespace XYBEngine
         }
     };
     static QtFactoryRegistration s_qtFactoryRegistration;
-
-    SharedPtr<IEditorApplication> QtFactory::CreateEditorApplication()
-    {
-        return MakeShared<QtApplication>();
-    }
+ 
     SharedPtr<IEditorWindow> QtFactory::CreateEditorWindow(EditorWindowType type)
     {
         switch (type)

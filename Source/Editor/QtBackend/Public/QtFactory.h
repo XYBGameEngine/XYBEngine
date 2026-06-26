@@ -12,8 +12,7 @@ namespace XYBEngine
 {
     class QtFactory : public IEditorFactory
     {
-    public:
-        SharedPtr<IEditorApplication> CreateEditorApplication() override;
+    public: 
         SharedPtr<IEditorWindow> CreateEditorWindow(EditorWindowType type) override;
     };
 }       
