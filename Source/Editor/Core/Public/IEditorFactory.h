@@ -9,6 +9,7 @@ namespace XYBEngine
 {
     enum class EditorWindowType
     {
+        ApplicationWindow,
         ConsoleWindow,
         None
     };
@@ -17,8 +18,7 @@ namespace XYBEngine
     {
     public:
         virtual ~IEditorFactory() = default;
-        
-        virtual SharedPtr<IEditorApplication> CreateEditorApplication() = 0;
+         
         virtual SharedPtr<IEditorWindow> CreateEditorWindow(EditorWindowType type) = 0;
     }; 
 }

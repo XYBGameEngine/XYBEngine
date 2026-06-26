@@ -10,6 +10,9 @@ namespace XYBEngine
     class XYB_API ConsoleWindow : public IEditorWindow
     {
     public: 
+        void Initialize(int argc, char** argv) override;
+        void Tick() override;
+        void Shutdown() override;
         void ShowWindow() override;
     };
 }
