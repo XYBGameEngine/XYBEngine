@@ -21,7 +21,14 @@
 #endif
 
 namespace XYBEngine
-{
+{ 
+    enum class EditorApplicationBackend
+    {
+        Qt,
+        None
+    };
+
+
     using int8   = std::int8_t;
     using int16  = std::int16_t;
     using int32  = std::int32_t;

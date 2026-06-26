@@ -1,16 +1,16 @@
-#include "Log.h"
-#include "IEditorFactory.h"
-#include "EditorRuntime.h"
+#include "Log.h" 
+#include "CreateEditorRuntime.h"
 
 using namespace XYBEngine;
 
 int main(int argc, char* argv[])
-{
-    InitEditorRuntime(argc, argv);
-
-    UniquePtr<IEditorFactory> editorFactory = MakeUnique<QtEditorFactory>();
-    SharedPtr<IEditorWindow> consoleWindow = editorFactory->CreateConsoleWindow();
-    consoleWindow->ShowWindow();
-    XYB_LOG_INFO("Hello, World!");
-    return RunEditorRuntime();
+{ 
+    UniquePtr<IEditorFactory> editorFactory = CreateEditorFactory(EditorApplicationBackend::Qt);
+    SharedPtr<IEditorApplication> editorApplication = editorFactory->CreateEditorApplication();
+    SharedPtr<IEditorWindow> editorWindow = editorFactory->CreateConsoleWindow();
+    editorApplication->Initialize(argc, argv);
+    editorWindow->ShowWindow();
+    editorApplication->Run();
+    editorApplication->Shutdown();
+    return 0;
 }
