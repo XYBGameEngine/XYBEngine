@@ -6,21 +6,16 @@
 
 class QtHelper
 {
-    public:
-    static void SetStyleSheet(QWidget *widget, const QString &url)
+    public:  
+    static QString ReadStringFromFile(const QString &url)
     {
         QFile file(url);
         if (file.open(QIODevice::ReadOnly | QIODevice::Text))
         {
-            QTextStream in(&file);
-            widget->setStyleSheet(in.readAll());
-        }
-        else
-        {
-            //XYB_ERROR("Failed to open style sheet file: {}", url);
+            return file.readAll();
         }
         file.close();
-        return;
+        return QString();
     }
 };
 

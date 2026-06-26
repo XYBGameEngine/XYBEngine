@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include "QtHelper.h"
+#include "Log.h"
+using namespace XYBEngine;
 
 namespace Ui {
 class QtConsoleWindow;

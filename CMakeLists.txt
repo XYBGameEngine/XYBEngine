@@ -25,7 +25,9 @@ message("-----------开始构建 XYBEngine 主项目 FirstDemo------------")
 add_executable(XYBGame 
     Samples/FirstDemo/main.cpp
     ${RESOURCE_FILES}
-)  
+)
+
+set_target_properties(XYBGame PROPERTIES AUTORCC ON)
 
 target_link_libraries(XYBGame PRIVATE 
     XYBCore 
