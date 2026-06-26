@@ -2,6 +2,16 @@
 
 namespace XYBEngine
 {
+    struct QtFactoryRegistration
+    {
+        QtFactoryRegistration()
+        {
+            CreateEditorFactory::GetInstance().RegisterEditorFactory(EditorApplicationBackend::Qt, MakeShared<QtFactory>());
+            Log::GetInstance().LogInfo("QtFactory registered");
+        }
+    };
+    static QtFactoryRegistration s_qtFactoryRegistration;
+
     SharedPtr<IEditorApplication> QtFactory::CreateEditorApplication()
     {
         return MakeShared<QtApplication>();

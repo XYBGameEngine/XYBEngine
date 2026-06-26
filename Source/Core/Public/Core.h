@@ -5,6 +5,8 @@
 #include <iostream>
 #include <utility>
 #include <vector>
+#include <map>
+#include <unordered_map>
 
 #if defined(XYB_SHARED_BUILD)
     #if defined(_WIN32)
@@ -56,4 +58,11 @@ namespace XYBEngine
 
     template<class T>
     using UniqueVectorPtr = std::vector<UniquePtr<T>>;
+
+    template<class T1, class T2>
+    using UnOrderedMap = std::unordered_map<T1, T2>;
+
+    template<class T1, class T2>
+    using OrderedMap = std::map<T1, T2>;
+ 
 } 

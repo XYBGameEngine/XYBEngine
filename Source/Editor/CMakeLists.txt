@@ -4,7 +4,7 @@ xyb_glob_cpp_sources(XYBCORE_SOURCES DIRS
     QtBackend/ConsoleWindow/Private
 )
 
-add_library(XYBEditor
+add_library(XYBEditor STATIC
     ${XYBCORE_SOURCES}
     QtBackend/ConsoleWindow/Public/QtConsoleWindow.h
     QtBackend/ConsoleWindow/Public/QtConsoleWindow.ui

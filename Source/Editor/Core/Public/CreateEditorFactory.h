@@ -1,8 +1,9 @@
-#ifndef CREATEEDITERRUNTIME_H
-#define CREATEEDITERRUNTIME_H
+#ifndef CREATEEDITERFACTORY_H
+#define CREATEEDITERFACTORY_H
 
 #include "IEditorFactory.h" 
 #include "Core.h"
+#include "Log.h"
 
 namespace XYBEngine
 {   
@@ -11,6 +12,22 @@ namespace XYBEngine
         Qt,
         None
     };
-    XYB_API SharedPtr<IEditorFactory> CreateEditorFactory(EditorApplicationBackend backend);
+  
+    class XYB_API CreateEditorFactory
+    {
+    private:
+        UnOrderedMap<EditorApplicationBackend, SharedPtr<IEditorFactory>> m_editorFactories;
+    public:
+        static CreateEditorFactory& GetInstance()
+        {
+            static CreateEditorFactory s_instance;
+            return s_instance;
+        }
+
+        void RegisterEditorFactory(EditorApplicationBackend backend, SharedPtr<IEditorFactory> editorFactory);
+        
+        SharedPtr<IEditorFactory> GetFactory(EditorApplicationBackend backend);
+    };
+ 
 }
-#endif // CREATEEDITERRUNTIME_H
+#endif // CREATEEDITERFACTORY_H

@@ -31,7 +31,7 @@ set_target_properties(XYBGame PROPERTIES AUTORCC ON)
 
 target_link_libraries(XYBGame PRIVATE 
     XYBCore 
-    XYBEditor
+    -Wl,--whole-archive XYBEditor -Wl,--no-whole-archive
 )
 
 xyb_deploy_windows_runtime(XYBGame)

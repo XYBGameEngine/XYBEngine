@@ -1,16 +1,19 @@
-#include "CreateEditorFactory.h"
-#include "QtFactory.h"
+#include "CreateEditorFactory.h" 
 
 namespace XYBEngine
-{
-    XYB_API SharedPtr<IEditorFactory> CreateEditorFactory(EditorApplicationBackend backend)
+{ 
+    void CreateEditorFactory::RegisterEditorFactory(EditorApplicationBackend backend, SharedPtr<IEditorFactory> editorFactory)
     {
-        switch (backend)
+        m_editorFactories[backend] = editorFactory;
+    }
+    SharedPtr<IEditorFactory> CreateEditorFactory::GetFactory(EditorApplicationBackend backend)
+    {
+        auto it = m_editorFactories.find(backend);
+        if (it != m_editorFactories.end())
         {
-        case EditorApplicationBackend::Qt:
-            return MakeShared<QtFactory>();
-        default:
-            return nullptr;
+            return it->second;
         }
-    } 
+        XYBEngine::Log::GetInstance().LogError("Editor factory not found for backend");
+        return nullptr; 
+    }
 }
