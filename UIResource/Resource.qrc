@@ -113,8 +113,8 @@
     </qresource>
     <qresource prefix="/Skin">
         <file>Skin/Dark.skin</file>
-        <file>Skin/Unity.skin</file>
         <file>Skin/Unreal.skin</file>
+        <file>Skin/CustomSkin.skin</file>
     </qresource>
     <qresource prefix="/ComputeShader">
         <file>ComputeShader/Layer_AlphaBlend.computeshader</file>
