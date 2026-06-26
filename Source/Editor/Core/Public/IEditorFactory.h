@@ -2,7 +2,7 @@
 #define IEDITORFACTORY_H
 
 #include "Core.h"
-#include "IConsoleWindow.h"
+#include "IEditorWindow.h"
 
 namespace XYBEngine
 {
@@ -11,14 +11,14 @@ namespace XYBEngine
     public:
         virtual ~IEditorFactory() = default;
         
-        virtual SharedPtr<IConsoleWindow> CreateConsoleWindow() = 0;
+        virtual SharedPtr<IEditorWindow> CreateConsoleWindow() = 0;
     };
 
 
     class XYB_API QtEditorFactory : public IEditorFactory
     {
     public:
-        SharedPtr<IConsoleWindow> CreateConsoleWindow() override;
+        SharedPtr<IEditorWindow> CreateConsoleWindow() override;
     };
 
 }

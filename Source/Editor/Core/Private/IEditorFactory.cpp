@@ -3,7 +3,7 @@
 
 namespace XYBEngine
 {
-    SharedPtr<IConsoleWindow> QtEditorFactory::CreateConsoleWindow()
+    SharedPtr<IEditorWindow> QtEditorFactory::CreateConsoleWindow()
     {
         return MakeShared<ConsoleWindow>();
     }

@@ -9,7 +9,7 @@ int main(int argc, char* argv[])
     InitEditorRuntime(argc, argv);
 
     UniquePtr<IEditorFactory> editorFactory = MakeUnique<QtEditorFactory>();
-    SharedPtr<IConsoleWindow> consoleWindow = editorFactory->CreateConsoleWindow();
+    SharedPtr<IEditorWindow> consoleWindow = editorFactory->CreateConsoleWindow();
     consoleWindow->ShowWindow();
     XYB_LOG_INFO("Hello, World!");
     return RunEditorRuntime();
