@@ -6,8 +6,14 @@ namespace XYBEngine
     {
         return MakeShared<QtApplication>();
     }
-    SharedPtr<IEditorWindow> QtFactory::CreateConsoleWindow()
+    SharedPtr<IEditorWindow> QtFactory::CreateEditorWindow(EditorWindowType type)
     {
-        return MakeShared<ConsoleWindow>();
+        switch (type)
+        {
+        case EditorWindowType::ConsoleWindow:
+            return MakeShared<ConsoleWindow>();
+        default:
+            return nullptr;
+        }
     }
 }

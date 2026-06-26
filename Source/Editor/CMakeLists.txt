@@ -23,6 +23,7 @@ target_link_libraries(XYBEditor PRIVATE
 
 target_include_directories(XYBEditor PUBLIC
     Core/Public 
+    PRIVATE
     QtBackend/Public
     QtBackend/ConsoleWindow/Public
 )

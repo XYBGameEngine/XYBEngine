@@ -12,7 +12,7 @@ namespace XYBEngine
     {
     public:
         SharedPtr<IEditorApplication> CreateEditorApplication() override;
-        SharedPtr<IEditorWindow> CreateConsoleWindow() override;
+        SharedPtr<IEditorWindow> CreateEditorWindow(EditorWindowType type) override;
     };
 }       
 #endif // QTFACTORY_H

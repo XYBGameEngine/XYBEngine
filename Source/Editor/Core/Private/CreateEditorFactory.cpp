@@ -1,9 +1,9 @@
-#include "CreateEditorRuntime.h"
+#include "CreateEditorFactory.h"
 #include "QtFactory.h"
 
 namespace XYBEngine
 {
-    SharedPtr<IEditorFactory> CreateEditorFactory(EditorApplicationBackend backend)
+    XYB_API SharedPtr<IEditorFactory> CreateEditorFactory(EditorApplicationBackend backend)
     {
         switch (backend)
         {
