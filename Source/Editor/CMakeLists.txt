@@ -1,5 +1,6 @@
 xyb_glob_cpp_sources(XYBCORE_SOURCES DIRS 
     Core/Private 
+    QtBackend/Private
     QtBackend/ConsoleWindow/Private
 )
 

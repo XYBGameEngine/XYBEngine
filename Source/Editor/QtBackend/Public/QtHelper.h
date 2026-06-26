@@ -4,28 +4,25 @@
 #include <QWidget>
 #include <QFile> 
 
-namespace XYBEngine
+class QtHelper
 {
-    class QtHelper
+    public:
+    static void SetStyleSheet(QWidget *widget, const QString &url)
     {
-        public:
-
-        static void SetStyleSheet(QWidget *widget, const QString &url)
+        QFile file(url);
+        if (file.open(QIODevice::ReadOnly | QIODevice::Text))
         {
-            QFile file(url);
-            if (file.open(QIODevice::ReadOnly | QIODevice::Text))
-            {
-                QTextStream in(&file);
-                widget->setStyleSheet(in.readAll());
-            }
-            else
-            {
-                //XYB_ERROR("Failed to open style sheet file: {}", url);
-            }
-            file.close();
-            return;
+            QTextStream in(&file);
+            widget->setStyleSheet(in.readAll());
         }
-    };
-}
+        else
+        {
+            //XYB_ERROR("Failed to open style sheet file: {}", url);
+        }
+        file.close();
+        return;
+    }
+};
+
 
 #endif // QTHELPER_H
