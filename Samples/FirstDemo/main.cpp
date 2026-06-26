@@ -5,7 +5,7 @@ using namespace XYBEngine;
 
 int main(int argc, char* argv[])
 { 
-    UniquePtr<IEditorFactory> editorFactory = CreateEditorFactory(EditorApplicationBackend::Qt);
+    SharedPtr<IEditorFactory> editorFactory = CreateEditorFactory(EditorApplicationBackend::Qt);
     SharedPtr<IEditorApplication> editorApplication = editorFactory->CreateEditorApplication();
     SharedPtr<IEditorWindow> editorWindow = editorFactory->CreateConsoleWindow();
     editorApplication->Initialize(argc, argv);
