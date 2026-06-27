@@ -6,7 +6,7 @@ QtConsoleWindow::QtConsoleWindow(QWidget *parent)
     , ui(new Ui::QtConsoleWindow)
 {
     ui->setupUi(this); 
-    QString _styleSheet = QtHelper::ReadStringFromFile(":/Skin/Skin/Unreal.skin");
+    QString _styleSheet = QtHelper::ReadStringFromFile(":/Skin/Skin/CustomSkin.skin");
     this->setStyleSheet(_styleSheet);   
 }
 

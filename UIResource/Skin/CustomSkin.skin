@@ -793,13 +793,12 @@ QFrame {
     border: none;
 }
 
-QFrame[frameShape="4"],
-QFrame[frameShape="5"] {
+QFrame[frameShape="4"] {
     color: #262633;
     max-height: 1px;
 }
 
-QFrame[frameShape="6"] {
+QFrame[frameShape="5"] {
     color: #262633;
     max-width: 1px;
 }

@@ -777,13 +777,12 @@ QFrame {
     border: none;
 }
 
-QFrame[frameShape="4"],
-QFrame[frameShape="5"] {
+QFrame[frameShape="4"] {
     color: #2e2e34;
     max-height: 1px;
 }
 
-QFrame[frameShape="6"] {
+QFrame[frameShape="5"] {
     color: #2e2e34;
     max-width: 1px;
 }
