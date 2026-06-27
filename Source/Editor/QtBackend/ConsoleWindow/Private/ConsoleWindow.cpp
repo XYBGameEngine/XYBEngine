@@ -8,26 +8,36 @@
 #include "QtConsoleWindow.h" 
 
 namespace XYBEngine
-{
-    namespace
+{ 
+    ConsoleWindow::~ConsoleWindow()
     {
-        /** 控制台对应的 Qt 控件实例，生命周期由 Show/Close 管理 */
-        UniquePtr<QtConsoleWindow> g_consoleWindow; 
+        m_consoleWindow.reset();
     }
 
     void ConsoleWindow::Show()
     {
-        g_consoleWindow = MakeUnique<QtConsoleWindow>();
-        g_consoleWindow->show();
+        if (!m_consoleWindow)
+        {
+            m_consoleWindow = MakeUnique<QtConsoleWindow>();
+        } 
+        m_consoleWindow->show();   
     }
 
     void ConsoleWindow::Hide()
     {
-        g_consoleWindow->hide();
+        if (!m_consoleWindow)
+        {
+            return;
+        }
+        m_consoleWindow->hide();
     }
 
     void ConsoleWindow::Close()
     {
-        g_consoleWindow->close();
+        if (!m_consoleWindow)
+        {
+            return;
+        }
+        m_consoleWindow->close();
     } 
 }

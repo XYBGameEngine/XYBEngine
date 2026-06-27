@@ -7,6 +7,8 @@
 //   将 QtFactory 注册到 CreateEditorFactory，无需手动调用注册代码。
 
 #include "QtFactory.h" 
+#include "QtApplication.h"
+#include "ConsoleWindow.h"
 
 namespace XYBEngine
 {
@@ -21,6 +23,10 @@ namespace XYBEngine
     };
     static QtFactoryRegistration s_qtFactoryRegistration;
  
+    QtFactory::~QtFactory()
+    {
+    }
+
     SharedPtr<IEditorWindow> QtFactory::CreateEditorWindow(EditorWindowType type)
     {
         switch (type)

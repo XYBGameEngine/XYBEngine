@@ -10,20 +10,18 @@
 #define QTFACTORY_H
 
 #include "Core.h"
-#include "IEditorFactory.h"
-#include "IEditorApplication.h"
-#include "IEditorWindow.h"
-#include "QtApplication.h"
-#include "ConsoleWindow.h"
+#include "IEditorFactory.h"  
+#include "Log.h" 
 #include "CreateEditorFactory.h"
-#include "Log.h"
 
 namespace XYBEngine
 {
     /** Qt 后端的编辑器工厂，在模块加载时自动注册 */
     class QtFactory : public IEditorFactory
     {
-    public: 
+    public:  
+        ~QtFactory();
+
         SharedPtr<IEditorApplication> CreateEditorApplication() override;
 
         SharedPtr<IEditorWindow> CreateEditorWindow(EditorWindowType type) override;

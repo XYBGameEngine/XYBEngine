@@ -10,9 +10,10 @@
 
 #include "Core.h"
 #include "IEditorWindow.h"
+#include "QtConsoleWindow.h" 
 
 namespace XYBEngine
-{
+{ 
     /**
      * 控制台窗口门面类。
      *
@@ -20,10 +21,16 @@ namespace XYBEngine
      */
     class XYB_API ConsoleWindow : public IEditorWindow
     {
-    public: 
-        void Show() override;
-        void Hide() override;
-        void Close() override; 
+        private:
+            UniquePtr<QtConsoleWindow> m_consoleWindow; 
+        public:  
+            ~ConsoleWindow();
+
+            void Show() override;
+
+            void Hide() override;
+            
+            void Close() override; 
     };
 }
 #endif // CONSOLEWINDOW_H
