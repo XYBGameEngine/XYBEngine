@@ -9,7 +9,7 @@ namespace XYBEngine
             g_qtApplication = std::make_unique<QApplication>(argc, argv);
         }
     }
-    void QtApplication::Tick()
+    void QtApplication::Run()
     {
         if (auto* app = qobject_cast<QApplication*>(QCoreApplication::instance()))
         {
@@ -18,8 +18,5 @@ namespace XYBEngine
     }
     void QtApplication::Shutdown()
     { 
-    }
-    void QtApplication::ShowWindow()
-    { 
-    }
+    } 
 }

@@ -15,14 +15,17 @@ namespace XYBEngine
     SharedPtr<IEditorWindow> QtFactory::CreateEditorWindow(EditorWindowType type)
     {
         switch (type)
-        {
-        case EditorWindowType::ApplicationWindow:
-            return MakeShared<QtApplication>();
+        { 
         case EditorWindowType::ConsoleWindow:
             return MakeShared<ConsoleWindow>();
         default:
             XYB_LOG_ERROR("Invalid editor window type");
             return nullptr;
         }
+    }
+
+    SharedPtr<IEditorApplication> QtFactory::CreateEditorApplication()
+    {
+        return MakeShared<QtApplication>();
     }
 }

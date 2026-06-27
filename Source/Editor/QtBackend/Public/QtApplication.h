@@ -3,19 +3,18 @@
 
 #include "Core.h"
 #include <QApplication>
-#include "IEditorWindow.h"
+#include "IEditorApplication.h"
 
 namespace XYBEngine
 { 
-    class XYB_API QtApplication : public IEditorWindow
+    class XYB_API QtApplication : public IEditorApplication
     {
     private: 
         UniquePtr<QApplication> g_qtApplication;
     public:
         void Initialize(int argc, char** argv) override;
-        void Tick() override;
+        void Run() override;
         void Shutdown() override;
-        void ShowWindow() override;
     };
 }
 #endif // QTAPPLICATION_H

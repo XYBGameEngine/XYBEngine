@@ -7,19 +7,17 @@ namespace XYBEngine
     {
         UniquePtr<QtConsoleWindow> g_consoleWindow; 
     }
-    void ConsoleWindow::Initialize(int argc, char** argv)
-    {
-    }
-    void ConsoleWindow::ShowWindow()
+    void ConsoleWindow::Show()
     {
         g_consoleWindow = MakeUnique<QtConsoleWindow>();
         g_consoleWindow->show();
     }
-    void ConsoleWindow::Tick()
+    void ConsoleWindow::Hide()
     {
+        g_consoleWindow->hide();
     }
-    void ConsoleWindow::Shutdown()
+    void ConsoleWindow::Close()
     {
-        g_consoleWindow.reset();
-    }
+        g_consoleWindow->close();
+    } 
 }
