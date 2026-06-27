@@ -8,7 +8,7 @@
 
 #include "QtFactory.h" 
 #include "QtApplication.h"
-#include "ConsoleWindow.h"
+#include "QtConsoleWindow.h" 
 
 namespace XYBEngine
 {
@@ -32,7 +32,7 @@ namespace XYBEngine
         switch (type)
         { 
         case EditorWindowType::ConsoleWindow:
-            return MakeShared<ConsoleWindow>();
+            return MakeShared<QtConsoleWindow>();
         default:
             XYB_LOG_ERROR("Invalid editor window type");
             return nullptr;

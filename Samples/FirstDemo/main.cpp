@@ -7,34 +7,15 @@
 //   2. 创建编辑器应用 + 所需窗口
 //   3. Initialize → Show 窗口 → Run 主循环 → Close → Shutdown
 
+#include "Core.h" 
 #include "Log.h" 
-#include "CreateEditorFactory.h"
+#include "EditorLauncher.h"
 
 using namespace XYBEngine;
 
 int main(int argc, char* argv[])
 { 
-    // -----------------------------------------------------------------------
-    // Phase 1: 解析后端，创建核心对象
-    // QtFactory 已在链接 XYBEditor 库时通过静态注册完成注册
-    // -----------------------------------------------------------------------
-    SharedPtr<IEditorFactory> editorFactory = CreateEditorFactory::GetInstance().GetFactory(EditorApplicationBackend::Qt);
-    SharedPtr<IEditorApplication> editorApplication = editorFactory->CreateEditorApplication();
-    SharedPtr<IEditorWindow> consoleWindow = editorFactory->CreateEditorWindow(EditorWindowType::ConsoleWindow); 
-    
-    // -----------------------------------------------------------------------
-    // Phase 2: 初始化并进入主循环
-    // -----------------------------------------------------------------------
-    editorApplication->Initialize(argc, argv);
-    
-    consoleWindow->Show();
-    editorApplication->Run(); // 阻塞，直到 Qt 事件循环结束
-
-    // -----------------------------------------------------------------------
-    // Phase 3: 清理
-    // -----------------------------------------------------------------------
-    consoleWindow->Close();
-    editorApplication->Shutdown();
-
+    UniquePtr<EditorLauncher> editorLauncher = MakeUnique<EditorLauncher>();
+    editorLauncher->Run(argc, argv);
     return 0;
 }

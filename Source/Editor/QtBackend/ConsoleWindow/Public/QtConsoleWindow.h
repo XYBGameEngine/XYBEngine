@@ -10,13 +10,17 @@
 
 #include <QWidget>
 #include "QtHelper.h" 
+#include "IEditorWindow.h"
+#include "Log.h"
+
+using namespace XYBEngine;
 
 namespace Ui {
 class QtConsoleWindow;
 }
 
 /** Qt 控制台窗口控件，由 ConsoleWindow 门面持有与驱动 */
-class QtConsoleWindow : public QWidget
+class QtConsoleWindow : public QWidget, public IEditorWindow
 {
     Q_OBJECT
 
@@ -24,6 +28,9 @@ public:
     explicit QtConsoleWindow(QWidget *parent = nullptr);
     ~QtConsoleWindow();
 
+    void Show() override;
+    void Hide() override;
+    void Close() override;
 private:
     Ui::QtConsoleWindow *ui;
 };

@@ -4,7 +4,6 @@
 
 #include "QtConsoleWindow.h"
 #include "ui_QtConsoleWindow.h" 
-#include "Log.h"
 
 QtConsoleWindow::QtConsoleWindow(QWidget *parent)
     : QWidget(parent)
@@ -19,4 +18,19 @@ QtConsoleWindow::QtConsoleWindow(QWidget *parent)
 QtConsoleWindow::~QtConsoleWindow()
 {
     delete ui;
+}
+
+void QtConsoleWindow::Show()
+{
+    this->show();
+}
+
+void QtConsoleWindow::Hide()
+{
+    this->hide();
+}
+
+void QtConsoleWindow::Close()
+{
+    this->close();
 }
