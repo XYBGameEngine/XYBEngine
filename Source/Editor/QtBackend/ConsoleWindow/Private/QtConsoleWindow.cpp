@@ -1,3 +1,7 @@
+// Copyright XYBEngine. All Rights Reserved.
+//
+// QtConsoleWindow.cpp - 控制台 Qt 控件实现
+
 #include "QtConsoleWindow.h"
 #include "ui_QtConsoleWindow.h" 
 #include "Log.h"
@@ -6,7 +10,8 @@ QtConsoleWindow::QtConsoleWindow(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::QtConsoleWindow)
 {
-    ui->setupUi(this); 
+    ui->setupUi(this);
+    // 从 Qt 资源系统加载皮肤样式表（qrc:/Skin/...）
     QString _styleSheet = QtHelper::ReadStringFromFile(":/Skin/Skin/Unreal.skin");
     this->setStyleSheet(_styleSheet);   
 }

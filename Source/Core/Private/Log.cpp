@@ -1,3 +1,7 @@
+// Copyright XYBEngine. All Rights Reserved.
+//
+// Log.cpp - 日志门面实现（委托 spdlog）
+
 #include "Log.h"
 
 namespace XYBEngine

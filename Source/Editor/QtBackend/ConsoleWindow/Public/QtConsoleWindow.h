@@ -1,3 +1,10 @@
+// Copyright XYBEngine. All Rights Reserved.
+//
+// QtConsoleWindow.h - 控制台 Qt 控件
+//
+// 模块：Editor / QtBackend / ConsoleWindow
+// 职责：控制台面板的 Qt 实现，布局由 QtConsoleWindow.ui 定义。
+
 #ifndef QTCONSOLEWINDOW_H
 #define QTCONSOLEWINDOW_H
 
@@ -8,6 +15,7 @@ namespace Ui {
 class QtConsoleWindow;
 }
 
+/** Qt 控制台窗口控件，由 ConsoleWindow 门面持有与驱动 */
 class QtConsoleWindow : public QWidget
 {
     Q_OBJECT

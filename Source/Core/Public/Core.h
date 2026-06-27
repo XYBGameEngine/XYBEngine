@@ -1,3 +1,11 @@
+// Copyright XYBEngine. All Rights Reserved.
+//
+// Core.h - 引擎核心基础类型与导出宏
+//
+// 模块：Core
+// 职责：提供跨模块共享的基础类型别名、智能指针封装及 DLL 导出宏（XYB_API）。
+//       所有引擎模块均应包含此头文件，而非直接使用 std 类型。
+
 #pragma once
 
 #include <cstdint>
@@ -8,6 +16,9 @@
 #include <map>
 #include <unordered_map>
 
+// ---------------------------------------------------------------------------
+// 导出宏：静态链接时 XYB_API 为空；动态库构建时按平台展开为 dllexport/dllimport
+// ---------------------------------------------------------------------------
 #if defined(XYB_SHARED_BUILD)
     #if defined(_WIN32)
         #if defined(XYB_LIB_BUILD)
@@ -23,8 +34,8 @@
 #endif
 
 namespace XYBEngine
-{  
-
+{
+    // 固定宽度整数类型（与平台无关，便于序列化与跨平台协议）
     using int8   = std::int8_t;
     using int16  = std::int16_t;
     using int32  = std::int32_t;
