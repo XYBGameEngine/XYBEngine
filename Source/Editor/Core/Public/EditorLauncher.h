@@ -11,4 +11,5 @@ namespace XYBEngine
         void Run(int argc, char* argv[]);
     };
 }
+
 #endif // EDITORLAUNCHER_H

@@ -1,0 +1,1 @@
+TODO: 静态注册的QtConsoleWindow构造在QtApplication的Initialize之前，要改成方法注册才行

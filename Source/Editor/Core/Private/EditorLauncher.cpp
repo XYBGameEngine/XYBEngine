@@ -8,7 +8,7 @@ namespace XYBEngine
 {
     void EditorLauncher::Run(int argc, char* argv[])
     {
-        UniquePtr<IEditorApplication> editorApplication = EditorApplicationRegister::GetInstance().GetEditorApplication();
+        SharedPtr<IEditorApplication> editorApplication = EditorApplicationRegister::GetInstance().GetEditorApplication();
         editorApplication->Initialize(argc, argv);
 
         SharedPtr<IEditorWindow> editorWindow = EditorWindowFactory::GetInstance().GetEditorWindow(EditorWindowType::ConsoleWindow);

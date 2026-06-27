@@ -2,12 +2,12 @@
 
 namespace XYBEngine
 {
-    void EditorApplicationRegister::Register(UniquePtr<IEditorApplication> editorApplication)
+    void EditorApplicationRegister::Register(SharedPtr<IEditorApplication> editorApplication)
     {
         m_editorApplication = editorApplication;
     }
 
-    UniquePtr<IEditorApplication> EditorApplicationRegister::GetEditorApplication()
+    SharedPtr<IEditorApplication> EditorApplicationRegister::GetEditorApplication()
     {
         return m_editorApplication;
     }

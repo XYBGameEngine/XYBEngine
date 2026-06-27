@@ -34,7 +34,7 @@ namespace XYBEngine
     class XYB_API EditorApplicationRegister
     {
         private:
-            UniquePtr<IEditorApplication> m_editorApplication;
+            SharedPtr<IEditorApplication> m_editorApplication;
         public:
             static EditorApplicationRegister& GetInstance()
             {
@@ -42,9 +42,9 @@ namespace XYBEngine
                 return s_instance;
             }
 
-            void Register(UniquePtr<IEditorApplication> editorApplication);
+            void Register(SharedPtr<IEditorApplication> editorApplication);
 
-            UniquePtr<IEditorApplication> GetEditorApplication();
+            SharedPtr<IEditorApplication> GetEditorApplication();
     };
 }
 #endif // IEDITORAPPLICATION_H

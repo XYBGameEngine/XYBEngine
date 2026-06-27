@@ -10,7 +10,7 @@ namespace XYBEngine
     {
         QtApplicationRegister()
         {
-            EditorApplicationRegister::GetInstance().Register(MakeUnique<QtApplication>());
+            EditorApplicationRegister::GetInstance().Register(MakeShared<QtApplication>());
         }
     };
     namespace
