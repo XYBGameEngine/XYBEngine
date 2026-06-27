@@ -1,5 +1,6 @@
 #include "QtConsoleWindow.h"
 #include "ui_QtConsoleWindow.h" 
+#include "Log.h"
 
 QtConsoleWindow::QtConsoleWindow(QWidget *parent)
     : QWidget(parent)

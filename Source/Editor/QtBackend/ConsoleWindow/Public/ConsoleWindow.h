@@ -3,7 +3,6 @@
 
 #include "Core.h"
 #include "IEditorWindow.h"
-#include "QtConsoleWindow.h"
 
 namespace XYBEngine
 {
