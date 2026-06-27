@@ -10,9 +10,17 @@
 #define IEDITORWINDOW_H
 
 #include "Core.h"
+#include "Log.h"
 
 namespace XYBEngine
 {
+    /** 编辑器窗口类型枚举，新增窗口在此扩展 */
+    enum class EditorWindowType
+    { 
+        ConsoleWindow,
+        None
+    };
+
     /**
      * 编辑器窗口抽象接口。
      *
@@ -26,6 +34,22 @@ namespace XYBEngine
         virtual void Show() = 0;
         virtual void Hide() = 0;
         virtual void Close() = 0;
+    };
+
+    class XYB_API EditorWindowFactory
+    {
+    private:
+        UnOrderedMap<EditorWindowType, SharedPtr<IEditorWindow>> m_editorWindows;
+    public: 
+        static EditorWindowFactory& GetInstance()
+        {
+            static EditorWindowFactory s_instance;
+            return s_instance;
+        }
+
+        void Register(EditorWindowType type, SharedPtr<IEditorWindow> editorWindow);
+
+        SharedPtr<IEditorWindow> GetEditorWindow(EditorWindowType type);
     };
 }
 #endif // IEDITORWINDOW_H

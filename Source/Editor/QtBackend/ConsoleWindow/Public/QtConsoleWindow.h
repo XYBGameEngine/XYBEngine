@@ -9,7 +9,6 @@
 #define QTCONSOLEWINDOW_H
 
 #include <QWidget>
-#include "QtHelper.h" 
 #include "IEditorWindow.h"
 #include "Log.h"
 

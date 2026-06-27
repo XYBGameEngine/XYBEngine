@@ -28,5 +28,6 @@ namespace XYBEngine
         void Run() override;
         void Shutdown() override;
     };
+
 }
 #endif // QTAPPLICATION_H

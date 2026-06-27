@@ -1,11 +1,6 @@
 #ifndef EDITORLAUNCHER_H
 #define EDITORLAUNCHER_H
 
-#include "Core.h"
-#include "CreateEditorFactory.h"
-#include "IEditorApplication.h"
-#include "IEditorWindow.h"
-
 namespace XYBEngine
 {
     class EditorLauncher

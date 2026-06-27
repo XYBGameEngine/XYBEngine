@@ -1,6 +1,6 @@
 xyb_glob_cpp_sources(XYBCORE_SOURCES DIRS 
     Core/Private 
-    QtBackend/Private
+    QtBackend/Application/Private
     QtBackend/ConsoleWindow/Private
 )
 
@@ -24,6 +24,6 @@ target_link_libraries(XYBEditor PRIVATE
 target_include_directories(XYBEditor PUBLIC
     Core/Public 
     PRIVATE
-    QtBackend/Public
+    QtBackend/Application/Public
     QtBackend/ConsoleWindow/Public
 )

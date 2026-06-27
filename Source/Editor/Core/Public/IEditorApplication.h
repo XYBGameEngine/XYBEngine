@@ -20,15 +20,31 @@ namespace XYBEngine
      */
     class XYB_API IEditorApplication
     {
-    public:
-        virtual ~IEditorApplication() = default;
+        public:
+            virtual ~IEditorApplication() = default;
 
-        /** 传入命令行参数，创建并初始化底层 UI 框架 */
-        virtual void Initialize(int argc, char** argv) = 0;
-        /** 进入主事件循环，直到应用退出 */
-        virtual void Run() = 0;
-        /** 释放资源，在 Run 返回后调用 */
-        virtual void Shutdown() = 0;
+            /** 传入命令行参数，创建并初始化底层 UI 框架 */
+            virtual void Initialize(int argc, char** argv) = 0;
+            /** 进入主事件循环，直到应用退出 */
+            virtual void Run() = 0;
+            /** 释放资源，在 Run 返回后调用 */
+            virtual void Shutdown() = 0;
+    };
+
+    class XYB_API EditorApplicationRegister
+    {
+        private:
+            UniquePtr<IEditorApplication> m_editorApplication;
+        public:
+            static EditorApplicationRegister& GetInstance()
+            {
+                static EditorApplicationRegister s_instance;
+                return s_instance;
+            }
+
+            void Register(UniquePtr<IEditorApplication> editorApplication);
+
+            UniquePtr<IEditorApplication> GetEditorApplication();
     };
 }
 #endif // IEDITORAPPLICATION_H

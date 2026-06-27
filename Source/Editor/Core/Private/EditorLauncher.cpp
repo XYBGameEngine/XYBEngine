@@ -1,15 +1,18 @@
 #include "EditorLauncher.h"
 
+#include "Core.h" 
+#include "IEditorApplication.h"
+#include "IEditorWindow.h"
+
 namespace XYBEngine
 {
     void EditorLauncher::Run(int argc, char* argv[])
     {
-        SharedPtr<IEditorFactory> editorFactory = CreateEditorFactory::GetInstance().GetFactory(EditorApplicationBackend::Qt);
-        SharedPtr<IEditorApplication> editorApplication = editorFactory->CreateEditorApplication();
+        UniquePtr<IEditorApplication> editorApplication = EditorApplicationRegister::GetInstance().GetEditorApplication();
         editorApplication->Initialize(argc, argv);
-        
-        SharedPtr<IEditorWindow> editorWindow = editorFactory->CreateEditorWindow(EditorWindowType::ConsoleWindow);
 
+        SharedPtr<IEditorWindow> editorWindow = EditorWindowFactory::GetInstance().GetEditorWindow(EditorWindowType::ConsoleWindow);
+        
         editorWindow->Show();
         editorApplication->Run();
 

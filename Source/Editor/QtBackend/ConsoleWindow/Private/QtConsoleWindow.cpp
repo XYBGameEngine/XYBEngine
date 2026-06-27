@@ -4,6 +4,26 @@
 
 #include "QtConsoleWindow.h"
 #include "ui_QtConsoleWindow.h" 
+#include "QtHelper.h" 
+
+using namespace XYBEngine;
+
+
+namespace XYBEngine
+{
+    struct ConsoleWindowRegister
+    { 
+        ConsoleWindowRegister()
+        {
+            EditorWindowFactory::GetInstance().Register(EditorWindowType::ConsoleWindow, MakeShared<QtConsoleWindow>());
+        }
+    };
+
+    namespace
+    {
+        static ConsoleWindowRegister s_consoleWindowRegister;
+    } 
+}
 
 QtConsoleWindow::QtConsoleWindow(QWidget *parent)
     : QWidget(parent)
