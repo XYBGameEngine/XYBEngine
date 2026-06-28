@@ -30,11 +30,15 @@ namespace XYBEngine
         ~DX12TriangleRenderer();
 
         bool Initialize(HWND hwnd, uint32 width, uint32 height);
-        void Resize(uint32 width, uint32 height);
+        bool Resize(uint32 width, uint32 height);
         void Render();
         void Shutdown();
 
         bool IsInitialized() const { return m_initialized; }
+        uint32 GetWidth() const { return m_width; }
+        uint32 GetHeight() const { return m_height; }
+        bool GetClientSize(uint32& width, uint32& height) const;
+        bool NeedsSwapChainResize() const;
 
     private:
         struct Vertex
@@ -50,6 +54,7 @@ namespace XYBEngine
         bool CreateRenderTargets();
         bool CreatePipeline();
         bool CreateVertexBuffer();
+        bool ResizeSwapChain(uint32 width, uint32 height);
         void WaitForGpu();
         void MoveToNextFrame();
 

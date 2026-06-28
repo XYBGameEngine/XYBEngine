@@ -7,6 +7,7 @@
 
 #ifdef _WIN32
 #include <d3dcompiler.h>
+#include <cstdio>
 #include <cstring>
 #include <stdexcept>
 
@@ -51,6 +52,31 @@ namespace XYBEngine
 
             return shader;
         }
+
+        bool ResolveClientSize(HWND hwnd, uint32& width, uint32& height)
+        {
+            if (hwnd == nullptr)
+            {
+                return width > 0 && height > 0;
+            }
+
+            RECT clientRect = {};
+            if (!GetClientRect(hwnd, &clientRect))
+            {
+                return width > 0 && height > 0;
+            }
+
+            const LONG clientWidth = clientRect.right - clientRect.left;
+            const LONG clientHeight = clientRect.bottom - clientRect.top;
+            if (clientWidth <= 0 || clientHeight <= 0)
+            {
+                return false;
+            }
+
+            width = static_cast<uint32>(clientWidth);
+            height = static_cast<uint32>(clientHeight);
+            return true;
+        }
     }
 
     DX12TriangleRenderer::~DX12TriangleRenderer()
@@ -66,6 +92,11 @@ namespace XYBEngine
         }
 
         m_hwnd = hwnd;
+        if (!ResolveClientSize(hwnd, width, height))
+        {
+            return false;
+        }
+
         m_width = width;
         m_height = height;
 
@@ -137,12 +168,47 @@ namespace XYBEngine
         }
     }
 
-    void DX12TriangleRenderer::Resize(uint32 width, uint32 height)
+    bool DX12TriangleRenderer::GetClientSize(uint32& width, uint32& height) const
     {
-        if (!m_initialized || (width == m_width && height == m_height) || width == 0 || height == 0)
+        return ResolveClientSize(m_hwnd, width, height);
+    }
+
+    bool DX12TriangleRenderer::NeedsSwapChainResize() const
+    {
+        if (!m_initialized)
         {
-            return;
+            return false;
         }
+
+        uint32 clientWidth = 0;
+        uint32 clientHeight = 0;
+        if (!GetClientSize(clientWidth, clientHeight))
+        {
+            return false;
+        }
+
+        return clientWidth != m_width || clientHeight != m_height;
+    }
+
+    bool DX12TriangleRenderer::Resize(uint32 width, uint32 height)
+    {
+        if (!m_initialized || width == 0 || height == 0)
+        {
+            return false;
+        }
+
+        if (!ResolveClientSize(m_hwnd, width, height))
+        {
+            return false;
+        }
+
+        if (width == m_width && height == m_height)
+        {
+            return true;
+        }
+
+        const uint32 oldWidth = m_width;
+        const uint32 oldHeight = m_height;
 
         try
         {
@@ -151,31 +217,63 @@ namespace XYBEngine
             for (uint32 i = 0; i < FrameCount; ++i)
             {
                 m_renderTargets[i].Reset();
-                m_fenceValues[i] = 0;
+            }
+            m_rtvHeap.Reset();
+
+            if (!ResizeSwapChain(width, height))
+            {
+                if (!m_initialized)
+                {
+                    return false;
+                }
+
+                if (oldWidth > 0 && oldHeight > 0)
+                {
+                    if (!ResizeSwapChain(oldWidth, oldHeight))
+                    {
+                        return false;
+                    }
+
+                    m_width = oldWidth;
+                    m_height = oldHeight;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                m_width = width;
+                m_height = height;
             }
 
-            ThrowIfFailed(
-                m_swapChain->ResizeBuffers(FrameCount, width, height, DXGI_FORMAT_R8G8B8A8_UNORM, 0),
-                "Failed to resize swap chain");
-
             m_frameIndex = m_swapChain->GetCurrentBackBufferIndex();
-            m_width = width;
-            m_height = height;
+
+            const uint64 completedFenceValue = m_fence->GetCompletedValue();
+            for (uint32 i = 0; i < FrameCount; ++i)
+            {
+                m_fenceValues[i] = completedFenceValue;
+            }
 
             if (!CreateRenderTargets())
             {
                 XYB_LOG_ERROR("Failed to recreate render targets after resize");
+                return false;
             }
+
+            return true;
         }
         catch (const std::exception&)
         {
             XYB_LOG_ERROR("DX12 viewport resize failed");
+            return false;
         }
     }
 
     void DX12TriangleRenderer::Render()
     {
-        if (!m_initialized)
+        if (!m_initialized || NeedsSwapChainResize())
         {
             return;
         }
@@ -183,6 +281,11 @@ namespace XYBEngine
         try
         {
             m_frameIndex = m_swapChain->GetCurrentBackBufferIndex();
+
+            if (m_renderTargets[m_frameIndex] == nullptr)
+            {
+                return;
+            }
 
             if (m_fence->GetCompletedValue() < m_fenceValues[m_frameIndex])
             {
@@ -232,7 +335,20 @@ namespace XYBEngine
 
             ID3D12CommandList* commandLists[] = {m_commandList.Get()};
             m_commandQueue->ExecuteCommandLists(1, commandLists);
-            ThrowIfFailed(m_swapChain->Present(0, 0), "Failed to present swap chain");
+
+            const HRESULT presentHr = m_swapChain->Present(0, 0);
+            if (presentHr == DXGI_ERROR_DEVICE_REMOVED || presentHr == DXGI_ERROR_DEVICE_RESET)
+            {
+                XYB_LOG_ERROR("DX12 device lost during present");
+                Shutdown();
+                return;
+            }
+
+            if (FAILED(presentHr))
+            {
+                XYB_LOG_ERROR("Failed to present swap chain");
+                return;
+            }
 
             MoveToNextFrame();
         }
@@ -249,7 +365,14 @@ namespace XYBEngine
             return;
         }
 
-        WaitForGpu();
+        try
+        {
+            WaitForGpu();
+        }
+        catch (const std::exception&)
+        {
+            XYB_LOG_ERROR("DX12 viewport shutdown wait failed");
+        }
 
         if (m_fenceEvent != nullptr)
         {
@@ -342,6 +465,43 @@ namespace XYBEngine
         ThrowIfFailed(m_factory->MakeWindowAssociation(hwnd, DXGI_MWA_NO_ALT_ENTER), "Failed to disable Alt+Enter");
         ThrowIfFailed(swapChain.As(&m_swapChain), "Failed to query IDXGISwapChain3");
         m_frameIndex = m_swapChain->GetCurrentBackBufferIndex();
+        return true;
+    }
+
+    bool DX12TriangleRenderer::ResizeSwapChain(uint32 width, uint32 height)
+    {
+        if (m_swapChain == nullptr)
+        {
+            return false;
+        }
+
+        const HRESULT hr = m_swapChain->ResizeBuffers(
+            FrameCount,
+            width,
+            height,
+            DXGI_FORMAT_R8G8B8A8_UNORM,
+            0);
+
+        if (FAILED(hr))
+        {
+            char message[128] = {};
+            std::snprintf(
+                message,
+                sizeof(message),
+                "Failed to resize swap chain (0x%08X) to %ux%u",
+                static_cast<unsigned>(hr),
+                width,
+                height);
+            XYB_LOG_ERROR(message);
+
+            if (hr == DXGI_ERROR_DEVICE_REMOVED || hr == DXGI_ERROR_DEVICE_RESET)
+            {
+                Shutdown();
+            }
+
+            return false;
+        }
+
         return true;
     }
 

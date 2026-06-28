@@ -11,6 +11,8 @@ class QtSceneViewportPanel;
 
 namespace XYBEngine
 {
+    class DX12ViewportWindow;
+
     class QtSceneViewportPanel : public QWidget, public IEditorPanel
     {
         Q_OBJECT
@@ -26,10 +28,9 @@ namespace XYBEngine
         void Close() override;
 
     private:
-        class DX12ViewportWidget;
-
         Ui::QtSceneViewportPanel *ui;
-        DX12ViewportWidget* m_viewportWidget = nullptr;
+        DX12ViewportWindow* m_viewportWindow = nullptr;
+        QWidget* m_viewportContainer = nullptr;
     };
 
     void QtSceneViewportPanelResiter();

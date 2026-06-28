@@ -18,6 +18,7 @@ add_library(XYBEditor
     ${XYBCORE_SOURCES}    
     QtBackend/Panel/Public/QtConsolePanel.h 
     QtBackend/Panel/Public/QtSceneViewportPanel.h 
+    QtBackend/Panel/Private/DX12ViewportWindow.h
     QtBackend/Shell/Public/QtMainShell.h 
 )
 
