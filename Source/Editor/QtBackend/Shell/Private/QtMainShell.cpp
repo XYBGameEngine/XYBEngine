@@ -47,7 +47,19 @@ namespace XYBEngine
         if (defaultArea == "Left")
         {
             ui->Dock_LeftLayout->layout()->addWidget(static_cast<QWidget*>(panel->GetNativeView()));
-        } 
+        }  
+        else if (defaultArea == "Bottom")
+        {
+            ui->Dock_BottomLayout->layout()->addWidget(static_cast<QWidget*>(panel->GetNativeView()));
+        }
+        else if (defaultArea == "Center")
+        {
+            ui->Dock_CenterLayout->layout()->addWidget(static_cast<QWidget*>(panel->GetNativeView()));
+        }
+        else
+        {
+            XYB_LOG_ERROR("Invalid default area");
+        }
     }
 
     void QtMainShell::TogglePanel(const String& panelId)
