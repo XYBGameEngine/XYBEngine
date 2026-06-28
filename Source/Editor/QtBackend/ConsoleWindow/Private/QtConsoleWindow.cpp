@@ -5,24 +5,10 @@
 #include "QtConsoleWindow.h"
 #include "ui_QtConsoleWindow.h" 
 #include "QtHelper.h" 
-
-using namespace XYBEngine;
-
-
-namespace XYBEngine
+ 
+void QtConsoleWindowResiter()
 {
-    struct ConsoleWindowRegister
-    { 
-        ConsoleWindowRegister()
-        {
-            EditorWindowFactory::GetInstance().Register(EditorWindowType::ConsoleWindow, MakeShared<QtConsoleWindow>());
-        }
-    };
-
-    namespace
-    {
-        static ConsoleWindowRegister s_consoleWindowRegister;
-    } 
+    EditorWindowFactory::GetInstance().Register(EditorWindowType::ConsoleWindow, MakeShared<QtConsoleWindow>());
 }
 
 QtConsoleWindow::QtConsoleWindow(QWidget *parent)

@@ -34,4 +34,6 @@ private:
     Ui::QtConsoleWindow *ui;
 };
 
+void QtConsoleWindowResiter();
+
 #endif // QTCONSOLEWINDOW_H

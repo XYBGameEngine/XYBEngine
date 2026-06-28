@@ -44,6 +44,8 @@ namespace XYBEngine
 
             void Register(SharedPtr<IEditorApplication> editorApplication);
 
+            void UnRegister();
+
             SharedPtr<IEditorApplication> GetEditorApplication();
     };
 }

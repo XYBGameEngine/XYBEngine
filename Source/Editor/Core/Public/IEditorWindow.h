@@ -49,6 +49,8 @@ namespace XYBEngine
 
         void Register(EditorWindowType type, SharedPtr<IEditorWindow> editorWindow);
 
+        void UnRegister(EditorWindowType type);
+
         SharedPtr<IEditorWindow> GetEditorWindow(EditorWindowType type);
     };
 }

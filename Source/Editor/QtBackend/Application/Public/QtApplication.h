@@ -9,8 +9,8 @@
 #define QTAPPLICATION_H
 
 #include "Core.h"
-#include <QApplication>
 #include "IEditorApplication.h"
+#include <QApplication>
 
 namespace XYBEngine
 { 
@@ -29,5 +29,6 @@ namespace XYBEngine
         void Shutdown() override;
     };
 
+    void QtApplicationResiter();
 }
 #endif // QTAPPLICATION_H

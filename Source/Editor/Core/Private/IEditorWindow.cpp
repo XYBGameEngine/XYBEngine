@@ -7,6 +7,16 @@ namespace XYBEngine
         m_editorWindows[type] = editorWindow;
     }
 
+    void EditorWindowFactory::UnRegister(EditorWindowType type)
+    {
+        if (m_editorWindows.find(type) == m_editorWindows.end())
+        {
+            XYB_LOG_ERROR("Editor Unregister window type not found");
+            return;
+        } 
+        m_editorWindows.erase(type);
+    }
+
     SharedPtr<IEditorWindow> EditorWindowFactory::GetEditorWindow(EditorWindowType type)
     {
         if (m_editorWindows.find(type) == m_editorWindows.end())

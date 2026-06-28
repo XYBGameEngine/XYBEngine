@@ -5,19 +5,12 @@
 #include "QtApplication.h"
 
 namespace XYBEngine
-{    
-    struct QtApplicationRegister
+{     
+    void QtApplicationResiter()
     {
-        QtApplicationRegister()
-        {
-            EditorApplicationRegister::GetInstance().Register(MakeShared<QtApplication>());
-        }
-    };
-    namespace
-    {
-        static QtApplicationRegister s_qtApplicationRegister;
+        EditorApplicationRegister::GetInstance().Register(MakeShared<QtApplication>());
     }
-
+    
     void QtApplication::Initialize(int argc, char** argv)
     {
         // 避免重复创建：若外部已存在 QApplication 实例则复用
