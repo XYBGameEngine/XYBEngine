@@ -12,28 +12,34 @@
 #include "IEditorWindow.h"
 #include "Log.h"
 
-using namespace XYBEngine;
+
 
 namespace Ui {
 class QtConsoleWindow;
 }
 
-/** Qt 控制台窗口控件，由 ConsoleWindow 门面持有与驱动 */
-class QtConsoleWindow : public QWidget, public IEditorWindow
+namespace XYBEngine
 {
-    Q_OBJECT
+    /** Qt 控制台窗口控件，由 ConsoleWindow 门面持有与驱动 */
+    class QtConsoleWindow : public QWidget, public IEditorWindow
+    {
+        Q_OBJECT
 
-public:
-    explicit QtConsoleWindow(QWidget *parent = nullptr);
-    ~QtConsoleWindow();
+    public:
+        explicit QtConsoleWindow(QWidget *parent = nullptr);
+        ~QtConsoleWindow();
 
-    void Show() override;
-    void Hide() override;
-    void Close() override;
-private:
-    Ui::QtConsoleWindow *ui;
-};
+        void Show() override;
 
-void QtConsoleWindowResiter();
+        void Hide() override;
+
+        void Close() override;
+        
+    private:
+        Ui::QtConsoleWindow *ui;
+    };
+
+    void QtConsoleWindowResiter();
+}
 
 #endif // QTCONSOLEWINDOW_H

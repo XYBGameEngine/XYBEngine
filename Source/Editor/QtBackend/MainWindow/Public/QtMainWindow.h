@@ -8,22 +8,28 @@ namespace Ui {
 class QtMainWindow;
 }
 
-class QtMainWindow : public QMainWindow, public IEditorWindow
+namespace XYBEngine
 {
-    Q_OBJECT
+    class QtMainWindow : public QMainWindow, public IEditorWindow
+    {
+        Q_OBJECT
 
-public:
-    explicit QtMainWindow(QWidget *parent = nullptr);
-    ~QtMainWindow();
+    public:
+        explicit QtMainWindow(QWidget *parent = nullptr);
+        ~QtMainWindow();
 
-    void Show() override;
-    void Hide() override;
-    void Close() override;
+        void Show() override;
+        
+        void Hide() override;
 
-private:
-    Ui::QtMainWindow *ui;
-};
+        void Close() override;
 
-void QtMainWindowResiter();
+    private:
+        Ui::QtMainWindow *ui;
+    };
+
+    void QtMainWindowResiter();
+}
+
 
 #endif // QTMAINWINDOW_H

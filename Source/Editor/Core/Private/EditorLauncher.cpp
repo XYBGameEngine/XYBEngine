@@ -26,7 +26,8 @@ namespace XYBEngine
         editorApplication->Run();
         editorApplication->Shutdown();
 
-        EditorWindowFactory::GetInstance().UnRegister(EditorWindowType::ConsoleWindow);
+        EditorWindowFactory::GetInstance().UnRegister(EditorWindowType::ConsoleWindow); 
+        EditorWindowFactory::GetInstance().UnRegister(EditorWindowType::MainWindow);
         EditorApplicationRegister::GetInstance().UnRegister();
     }
 }

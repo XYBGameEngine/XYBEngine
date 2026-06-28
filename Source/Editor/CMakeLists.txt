@@ -8,7 +8,7 @@ xyb_glob_cpp_sources(XYBCORE_SOURCES DIRS
 add_library(XYBEditor
     ${XYBCORE_SOURCES}    
     QtBackend/ConsoleWindow/Public/QtConsoleWindow.h 
-    QtBackend/ConsoleWindow/Public/QtMainWindow.h 
+    QtBackend/MainWindow/Public/QtMainWindow.h 
 )
 
 set_target_properties(XYBEditor PROPERTIES
