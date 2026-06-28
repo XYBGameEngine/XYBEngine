@@ -8,7 +8,7 @@
 #ifndef QTMAINSHELL_H
 #define QTMAINSHELL_H
 
-#include "IEditorPanel.h"
+#include "IEditorShell.h"
 #include <QMainWindow>
 
 namespace Ui {
@@ -36,7 +36,7 @@ namespace XYBEngine
         void Close() override;
         void AddPanel(const String& defaultArea, SharedPtr<IEditorPanel> panel) override;
         void TogglePanel(const String& panelId) override;
-        
+
     private:
         Ui::QtMainShell *ui;
     };
