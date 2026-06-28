@@ -44,17 +44,21 @@ namespace XYBEngine
  
     void QtMainShell::AddPanel(const String& defaultArea, SharedPtr<IEditorPanel> panel)
     { 
+        QWidget* panelWidget = static_cast<QWidget*>(panel->GetNativeView());   
+
         if (defaultArea == "Left")
         {
-            ui->Dock_LeftLayout->layout()->addWidget(static_cast<QWidget*>(panel->GetNativeView()));
+            ui->Dock_Left->setWindowTitle(panel->GetPanelId());
+            ui->Dock_LeftLayout->layout()->addWidget(panelWidget);
         }  
         else if (defaultArea == "Bottom")
         {
-            ui->Dock_BottomLayout->layout()->addWidget(static_cast<QWidget*>(panel->GetNativeView()));
+            ui->Dock_Bottom->setWindowTitle(panel->GetPanelId());
+            ui->Dock_BottomLayout->layout()->addWidget(panelWidget);
         }
         else if (defaultArea == "Center")
         {
-            ui->Dock_CenterLayout->layout()->addWidget(static_cast<QWidget*>(panel->GetNativeView()));
+            ui->Dock_CenterLayout->layout()->addWidget(panelWidget);
         }
         else
         {

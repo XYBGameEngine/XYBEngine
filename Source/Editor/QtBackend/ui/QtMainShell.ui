@@ -49,7 +49,7 @@
    <addaction name="menuTest"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <widget class="QDockWidget" name="dockWidget">
+  <widget class="QDockWidget" name="Dock_Left">
    <attribute name="dockWidgetArea">
     <number>1</number>
    </attribute>
@@ -73,7 +73,7 @@
     </layout>
    </widget>
   </widget>
-  <widget class="QDockWidget" name="dockWidget_4">
+  <widget class="QDockWidget" name="Dock_Bottom">
    <attribute name="dockWidgetArea">
     <number>8</number>
    </attribute>

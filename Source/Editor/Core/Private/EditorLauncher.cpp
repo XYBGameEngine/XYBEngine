@@ -14,6 +14,7 @@
 #include "QtApplication.h"
 #include "QtConsolePanel.h"
 #include "QtMainShell.h"   
+#include "QtSceneViewportPanel.h"
 
 namespace XYBEngine
 {
@@ -26,11 +27,14 @@ namespace XYBEngine
  
         // 注册并显示编辑器窗口
         QtConsolePanelResiter();   
+        QtSceneViewportPanelResiter();
         auto mainShell = MakeShared<QtMainShell>();
         mainShell->Initialize();
 
         SharedPtr<IEditorPanel> consolePanel = EditorPanelRegister::GetInstance().CreateEditorPanel("Console");
+        SharedPtr<IEditorPanel> sceneViewportPanel = EditorPanelRegister::GetInstance().CreateEditorPanel("SceneViewport");
         mainShell->AddPanel("Left", consolePanel); 
+        mainShell->AddPanel("Center", sceneViewportPanel);
         mainShell->Show();
 
         // 进入 Qt 事件循环，返回后释放资源

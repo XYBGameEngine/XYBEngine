@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>QtSceneViewportPanel</class>
+ <widget class="QWidget" name="QtSceneViewportPanel">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>853</width>
+    <height>710</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Scene</string>
+  </property>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

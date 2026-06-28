@@ -12,6 +12,7 @@ xyb_glob_cpp_sources(XYBCORE_SOURCES DIRS
 add_library(XYBEditor
     ${XYBCORE_SOURCES}    
     QtBackend/Panel/Public/QtConsolePanel.h 
+    QtBackend/Panel/Public/QtSceneViewportPanel.h 
     QtBackend/Shell/Public/QtMainShell.h 
 )
 
