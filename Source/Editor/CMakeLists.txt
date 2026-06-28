@@ -2,18 +2,20 @@ xyb_glob_cpp_sources(XYBCORE_SOURCES DIRS
     Core/Private 
     QtBackend/Application/Private
     QtBackend/ConsoleWindow/Private
+    QtBackend/MainWindow/Private
 )
 
-add_library(XYBEditor STATIC
-    ${XYBCORE_SOURCES}
-    QtBackend/ConsoleWindow/Public/QtConsoleWindow.h
-    QtBackend/ConsoleWindow/Public/QtConsoleWindow.ui
+add_library(XYBEditor
+    ${XYBCORE_SOURCES}    
+    QtBackend/ConsoleWindow/Public/QtConsoleWindow.h 
+    QtBackend/ConsoleWindow/Public/QtMainWindow.h 
 )
 
 set_target_properties(XYBEditor PROPERTIES
     AUTOMOC ON
     AUTOUIC ON
-    AUTOUIC_SEARCH_PATHS "${CMAKE_CURRENT_SOURCE_DIR}/QtBackend/ConsoleWindow/Public"
+    AUTOUIC_SEARCH_PATHS 
+        "${CMAKE_CURRENT_SOURCE_DIR}/QtBackend/ConsoleWindow/Private;${CMAKE_CURRENT_SOURCE_DIR}/QtBackend/MainWindow/Private" 
 )
 
 target_link_libraries(XYBEditor PRIVATE
@@ -26,4 +28,5 @@ target_include_directories(XYBEditor PUBLIC
     PRIVATE
     QtBackend/Application/Public
     QtBackend/ConsoleWindow/Public
+    QtBackend/MainWindow/Public
 )

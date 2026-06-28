@@ -16,8 +16,9 @@ namespace XYBEngine
 {
     /** 编辑器窗口类型枚举，新增窗口在此扩展 */
     enum class EditorWindowType
-    { 
+    {   
         ConsoleWindow,
+        MainWindow,
         None
     };
 

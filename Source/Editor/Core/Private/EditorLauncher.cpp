@@ -5,6 +5,7 @@
 #include "IEditorWindow.h"  
 #include "QtApplication.h"
 #include "QtConsoleWindow.h"
+#include "QtMainWindow.h"
 
 namespace XYBEngine
 {
@@ -15,14 +16,16 @@ namespace XYBEngine
         editorApplication->Initialize(argc, argv);
  
         QtConsoleWindowResiter();
-        SharedPtr<IEditorWindow> editorWindow = EditorWindowFactory::GetInstance().GetEditorWindow(EditorWindowType::ConsoleWindow);
+        QtMainWindowResiter();
+        SharedPtr<IEditorWindow> mainWindow = EditorWindowFactory::GetInstance().GetEditorWindow(EditorWindowType::MainWindow);
+        SharedPtr<IEditorWindow> consoleWindow = EditorWindowFactory::GetInstance().GetEditorWindow(EditorWindowType::ConsoleWindow);
         
-        editorWindow->Show();
-        editorApplication->Run();
+        mainWindow->Show();
+        consoleWindow->Show();  
 
-        editorWindow->Close();
+        editorApplication->Run();
         editorApplication->Shutdown();
-        
+
         EditorWindowFactory::GetInstance().UnRegister(EditorWindowType::ConsoleWindow);
         EditorApplicationRegister::GetInstance().UnRegister();
     }
