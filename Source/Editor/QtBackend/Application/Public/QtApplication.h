@@ -29,6 +29,7 @@ namespace XYBEngine
         void Shutdown() override;
     };
 
+    /** 将 QtApplication 注册到 EditorApplicationRegister，由 EditorLauncher 调用 */
     void QtApplicationResiter();
 }
 #endif // QTAPPLICATION_H

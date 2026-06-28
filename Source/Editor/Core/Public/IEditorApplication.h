@@ -31,6 +31,11 @@ namespace XYBEngine
             virtual void Shutdown() = 0;
     };
 
+    /**
+     * 编辑器应用注册中心（单例）。
+     *
+     * Qt 后端通过 QtApplicationResiter() 注册实现；EditorLauncher 在启动时获取实例。
+     */
     class XYB_API EditorApplicationRegister
     {
         private:
@@ -42,10 +47,13 @@ namespace XYBEngine
                 return s_instance;
             }
 
+            /** 注册编辑器应用实现，通常由 QtApplicationResiter() 调用 */
             void Register(SharedPtr<IEditorApplication> editorApplication);
 
+            /** 清除当前注册的应用实例 */
             void UnRegister();
 
+            /** 获取已注册的编辑器应用，未注册时返回 nullptr */
             SharedPtr<IEditorApplication> GetEditorApplication();
     };
 }

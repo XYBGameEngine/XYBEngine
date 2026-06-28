@@ -1,3 +1,10 @@
+// Copyright XYBEngine. All Rights Reserved.
+//
+// IEditorWindow.cpp - EditorWindowFactory 单例实现
+//
+// 模块：Editor / Core
+// 职责：按 EditorWindowType 注册、查找与移除 IEditorWindow 实例。
+
 #include "IEditorWindow.h"
 
 namespace XYBEngine

@@ -1,3 +1,7 @@
+# Editor 模块 CMake 配置
+# 构建 XYBEditor 静态库：Core 抽象层 + Qt 后端（Application / MainWindow / ConsoleWindow）
+# UI 布局文件位于 QtBackend/ui，由 AUTOUIC 自动生成 ui_*.h
+
 xyb_glob_cpp_sources(XYBCORE_SOURCES DIRS 
     Core/Private 
     QtBackend/Application/Private

@@ -20,7 +20,7 @@ class QtConsoleWindow;
 
 namespace XYBEngine
 {
-    /** Qt 控制台窗口控件，由 ConsoleWindow 门面持有与驱动 */
+    /** Qt 控制台窗口，实现 IEditorWindow 接口，布局由 QtConsoleWindow.ui 定义 */
     class QtConsoleWindow : public QWidget, public IEditorWindow
     {
         Q_OBJECT
@@ -34,11 +34,12 @@ namespace XYBEngine
         void Hide() override;
 
         void Close() override;
-        
+
     private:
         Ui::QtConsoleWindow *ui;
     };
 
+    /** 将 QtConsoleWindow 注册到 EditorWindowFactory，由 EditorLauncher 调用 */
     void QtConsoleWindowResiter();
 }
 

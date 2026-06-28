@@ -6,6 +6,7 @@
 
 namespace XYBEngine
 {     
+    /** 注册 Qt 应用实现到 EditorApplicationRegister */
     void QtApplicationResiter()
     {
         EditorApplicationRegister::GetInstance().Register(MakeShared<QtApplication>());

@@ -1,4 +1,5 @@
-# Cmake 引擎构架
+# CMake 引擎架构
+# 顶层构建：ThirdParty → Core → Editor → FirstDemo 示例可执行文件
 cmake_minimum_required(VERSION 3.20)
 
 project(XYBEngine)

@@ -1,3 +1,7 @@
+// Copyright XYBEngine. All Rights Reserved.
+//
+// QtMainWindow.cpp - 编辑器主窗口 Qt 实现
+
 #include "QtMainWindow.h"
 #include "ui_QtMainWindow.h"
 #include "QtHelper.h"

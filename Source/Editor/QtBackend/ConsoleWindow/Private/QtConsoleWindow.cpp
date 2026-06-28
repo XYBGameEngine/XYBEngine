@@ -8,6 +8,7 @@
  
 namespace XYBEngine
 {
+    /** 注册控制台窗口到 EditorWindowFactory */
     void QtConsoleWindowResiter()
     {
         EditorWindowFactory::GetInstance().Register(EditorWindowType::ConsoleWindow, MakeShared<QtConsoleWindow>());
