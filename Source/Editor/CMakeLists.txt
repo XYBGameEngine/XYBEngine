@@ -15,7 +15,7 @@ set_target_properties(XYBEditor PROPERTIES
     AUTOMOC ON
     AUTOUIC ON
     AUTOUIC_SEARCH_PATHS 
-        "${CMAKE_CURRENT_SOURCE_DIR}/QtBackend/ConsoleWindow/Private;${CMAKE_CURRENT_SOURCE_DIR}/QtBackend/MainWindow/Private" 
+        "${CMAKE_CURRENT_SOURCE_DIR}/QtBackend/ui" 
 )
 
 target_link_libraries(XYBEditor PRIVATE
