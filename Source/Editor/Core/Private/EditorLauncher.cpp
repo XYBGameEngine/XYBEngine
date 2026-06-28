@@ -30,8 +30,7 @@ namespace XYBEngine
         mainShell->Initialize();
 
         SharedPtr<IEditorPanel> consolePanel = EditorPanelRegister::GetInstance().CreateEditorPanel("Console");
-        mainShell->AddPanel("Console", consolePanel);
-        consolePanel->Show();  
+        mainShell->AddPanel("Left", consolePanel); 
         mainShell->Show();
 
         // 进入 Qt 事件循环，返回后释放资源

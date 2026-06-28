@@ -28,6 +28,11 @@ namespace XYBEngine
         return EditorPanelIds::Console;
     }
 
+    void* QtConsolePanel::GetNativeView() const
+    {
+        return const_cast<QWidget*>(static_cast<const QWidget*>(this));
+    }
+
     QtConsolePanel::QtConsolePanel(QWidget *parent)
         : QWidget(parent)
         , ui(new Ui::QtConsolePanel)

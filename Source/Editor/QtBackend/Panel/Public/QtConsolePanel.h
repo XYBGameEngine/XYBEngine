@@ -28,11 +28,10 @@ namespace XYBEngine
         ~QtConsolePanel();
 
         const char* GetPanelId() const override;
+        void* GetNativeView() const override;
 
         void Show() override;
-
         void Hide() override;
-
         void Close() override;
 
     private:

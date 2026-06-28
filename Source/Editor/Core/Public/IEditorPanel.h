@@ -12,6 +12,7 @@ namespace XYBEngine
         virtual ~IEditorPanel() = default;
 
         virtual const char* GetPanelId() const = 0;
+        virtual void* GetNativeView() const = 0;
         virtual void Show() = 0;
         virtual void Hide() = 0;
         virtual void Close() = 0;

@@ -44,6 +44,10 @@ namespace XYBEngine
  
     void QtMainShell::AddPanel(const String& defaultArea, SharedPtr<IEditorPanel> panel)
     { 
+        if (defaultArea == "Left")
+        {
+            ui->Dock_LeftLayout->layout()->addWidget(static_cast<QWidget*>(panel->GetNativeView()));
+        } 
     }
 
     void QtMainShell::TogglePanel(const String& panelId)
