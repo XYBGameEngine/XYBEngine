@@ -46,6 +46,8 @@ namespace XYBEngine
     using uint32 = std::uint32_t;
     using uint64 = std::uint64_t;
 
+    using String = std::string;
+    
     template<class T>
     using UniquePtr = std::unique_ptr<T>;
 

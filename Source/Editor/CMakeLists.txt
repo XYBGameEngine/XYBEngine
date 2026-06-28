@@ -5,14 +5,14 @@
 xyb_glob_cpp_sources(XYBCORE_SOURCES DIRS 
     Core/Private 
     QtBackend/Application/Private
-    QtBackend/ConsoleWindow/Private
-    QtBackend/MainWindow/Private
+    QtBackend/Panel/Private 
+    QtBackend/Shell/Private 
 )
 
 add_library(XYBEditor
     ${XYBCORE_SOURCES}    
-    QtBackend/ConsoleWindow/Public/QtConsoleWindow.h 
-    QtBackend/MainWindow/Public/QtMainWindow.h 
+    QtBackend/Panel/Public/QtConsolePanel.h 
+    QtBackend/Shell/Public/QtMainWindow.h 
 )
 
 set_target_properties(XYBEditor PROPERTIES
@@ -31,6 +31,6 @@ target_include_directories(XYBEditor PUBLIC
     Core/Public 
     PRIVATE
     QtBackend/Application/Public
-    QtBackend/ConsoleWindow/Public
-    QtBackend/MainWindow/Public
+    QtBackend/Panel/Public
+    QtBackend/Shell/Public
 )

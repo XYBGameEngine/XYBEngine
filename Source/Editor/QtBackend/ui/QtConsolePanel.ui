@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>QtConsoleWindow</class>
- <widget class="QWidget" name="QtConsoleWindow">
+ <class>QtConsolePanel</class>
+ <widget class="QWidget" name="QtConsolePanel">
   <property name="geometry">
    <rect>
     <x>0</x>
