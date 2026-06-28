@@ -15,18 +15,21 @@ namespace XYBEngine
     {
         Q_OBJECT
 
-        public:
-            explicit QtSceneViewportPanel(QWidget *parent = nullptr);
-            ~QtSceneViewportPanel();
+    public:
+        explicit QtSceneViewportPanel(QWidget *parent = nullptr);
+        ~QtSceneViewportPanel();
 
-            const char* GetPanelId() const override;
-            void* GetNativeView() const override;
-            void Show() override;
-            void Hide() override;
-            void Close() override;
+        const char* GetPanelId() const override;
+        void* GetNativeView() const override;
+        void Show() override;
+        void Hide() override;
+        void Close() override;
 
-        private:
-            Ui::QtSceneViewportPanel *ui;
+    private:
+        class DX12ViewportWidget;
+
+        Ui::QtSceneViewportPanel *ui;
+        DX12ViewportWidget* m_viewportWidget = nullptr;
     };
 
     void QtSceneViewportPanelResiter();

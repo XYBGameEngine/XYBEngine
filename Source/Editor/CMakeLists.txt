@@ -9,6 +9,11 @@ xyb_glob_cpp_sources(XYBCORE_SOURCES DIRS
     QtBackend/Shell/Private 
 )
 
+if(WIN32)
+    xyb_glob_cpp_sources(XYB_DX12_SOURCES DIRS QtBackend/Rendering/Private)
+    list(APPEND XYBCORE_SOURCES ${XYB_DX12_SOURCES})
+endif()
+
 add_library(XYBEditor
     ${XYBCORE_SOURCES}    
     QtBackend/Panel/Public/QtConsolePanel.h 
@@ -28,6 +33,10 @@ target_link_libraries(XYBEditor PRIVATE
     Qt${QT_VERSION_MAJOR}::Widgets
 )
 
+if(WIN32)
+    target_link_libraries(XYBEditor PRIVATE d3d12 dxgi dxguid d3dcompiler)
+endif()
+
 target_include_directories(XYBEditor PUBLIC
     Core/Public 
     PRIVATE
@@ -35,3 +44,7 @@ target_include_directories(XYBEditor PUBLIC
     QtBackend/Panel/Public
     QtBackend/Shell/Public
 )
+
+if(WIN32)
+    target_include_directories(XYBEditor PRIVATE QtBackend/Rendering/Public)
+endif()
