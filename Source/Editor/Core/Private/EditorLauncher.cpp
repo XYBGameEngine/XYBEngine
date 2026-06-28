@@ -10,11 +10,10 @@
 #include "EditorLauncher.h"
 
 #include "Core.h" 
-#include "IEditorApplication.h"
-#include "IEditorWindow.h"  
+#include "IEditorApplication.h" 
 #include "QtApplication.h"
 #include "QtConsolePanel.h"
-#include "QtMainWindow.h"
+#include "QtMainShell.h"   
 
 namespace XYBEngine
 {
@@ -27,10 +26,13 @@ namespace XYBEngine
  
         // 注册并显示编辑器窗口
         QtConsolePanelResiter();   
-        QtMainWindowResiter(); 
-        SharedPtr<IEditorPanel> consolePanel = EditorPanelRegister::GetInstance().CreateEditorPanel(EditorPanelIds::Console);
-         
+        auto mainShell = MakeShared<QtMainShell>();
+        mainShell->Initialize();
+
+        SharedPtr<IEditorPanel> consolePanel = EditorPanelRegister::GetInstance().CreateEditorPanel("Console");
+        mainShell->AddPanel("Console", consolePanel);
         consolePanel->Show();  
+        mainShell->Show();
 
         // 进入 Qt 事件循环，返回后释放资源
         editorApplication->Run();

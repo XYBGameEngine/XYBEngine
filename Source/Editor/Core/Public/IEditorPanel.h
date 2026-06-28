@@ -5,15 +5,8 @@
 #include "Log.h"
 
 namespace XYBEngine
-{  
-    // QtConsolePanel.h —— 常量属于 Console 模块，不属于 Core
-    namespace EditorPanelIds
-    {
-        inline constexpr const char* Console  = "Console";
-        inline constexpr const char* Viewport = "Viewport";
-    }
-
-    class IEditorPanel
+{   
+    class XYB_API IEditorPanel
     {
     public:
         virtual ~IEditorPanel() = default;
@@ -26,7 +19,7 @@ namespace XYBEngine
 
     using EditorPanelFactory = SharedPtr<IEditorPanel>(*)();
 
-    class EditorPanelRegister
+    class XYB_API EditorPanelRegister
     {
     private:
         UnOrderedMap<String, EditorPanelFactory> m_editorPanelFactories;
@@ -41,6 +34,18 @@ namespace XYBEngine
         SharedPtr<IEditorPanel> CreateEditorPanel(const String& panelId);
     };
 
+    class XYB_API IEditorShell
+    {
+    public:
+        virtual ~IEditorShell() = default;
+        
+        virtual void Initialize() = 0;
+        virtual void Show() = 0;
+        virtual void Hide() = 0;
+        virtual void Close() = 0;
+        virtual void AddPanel(const String& defaultArea, SharedPtr<IEditorPanel> panel) = 0;
+        virtual void TogglePanel(const String& panelId) = 0;
+    };
 }
 
 #endif

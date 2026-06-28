@@ -8,6 +8,11 @@
  
 namespace XYBEngine
 { 
+    namespace EditorPanelIds
+    {
+        inline constexpr const char* Console  = "Console";
+    }
+
     static SharedPtr<IEditorPanel> CreateConsolePanel()
     {
         return MakeShared<QtConsolePanel>();
