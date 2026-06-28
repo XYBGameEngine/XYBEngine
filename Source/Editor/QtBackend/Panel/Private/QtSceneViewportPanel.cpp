@@ -30,16 +30,10 @@ namespace XYBEngine
     {
         ui->setupUi(this);
 
-#ifdef _WIN32
-        auto* layout = new QVBoxLayout(this);
-        layout->setContentsMargins(0, 0, 0, 0);
-        layout->setSpacing(0);
-
-        m_viewportWindow = new DX12ViewportWindow();
-        m_viewportContainer = QWidget::createWindowContainer(m_viewportWindow, this);
-        m_viewportContainer->setMinimumSize(320, 240);
-        m_viewportContainer->setFocusPolicy(Qt::StrongFocus);
-        layout->addWidget(m_viewportContainer);
+#ifdef _WIN32  
+        m_viewportWindow = new DX12ViewportWindow(this);
+        m_viewportWindow->setFocusPolicy(Qt::StrongFocus);
+        ui->UI_ViewportLayout->layout()->addWidget(m_viewportWindow);
 #else
         XYB_LOG_WARNING("DX12 viewport rendering is only supported on Windows");
 #endif

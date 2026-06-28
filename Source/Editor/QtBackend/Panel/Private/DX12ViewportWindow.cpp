@@ -4,16 +4,21 @@
 
 #include "Log.h"
 
-#include <QEvent>
-#include <QPlatformSurfaceEvent>
+#include <QPaintEvent>
 #include <QResizeEvent>
+#include <QShowEvent>
 
 namespace XYBEngine
 {
-    DX12ViewportWindow::DX12ViewportWindow(QWindow* parent)
-        : QWindow(parent)
+    DX12ViewportWindow::DX12ViewportWindow(QWidget* parent)
+        : QWidget(parent)
     {
-        setMinimumSize(QSize(320, 240));
+        setMinimumSize(320, 240);
+        setAttribute(Qt::WA_NativeWindow);
+        setAttribute(Qt::WA_PaintOnScreen);
+        setAttribute(Qt::WA_OpaquePaintEvent);
+        setAttribute(Qt::WA_NoSystemBackground);
+        setFocusPolicy(Qt::StrongFocus);
     }
 
     DX12ViewportWindow::~DX12ViewportWindow()
@@ -21,42 +26,20 @@ namespace XYBEngine
         m_renderer.Shutdown();
     }
 
-    bool DX12ViewportWindow::event(QEvent* event)
+    QPaintEngine* DX12ViewportWindow::paintEngine() const
     {
-        switch (event->type())
-        {
-        case QEvent::UpdateRequest:
-            renderFrame();
-            break;
-
-        case QEvent::PlatformSurface:
-            if (static_cast<QPlatformSurfaceEvent*>(event)->surfaceEventType()
-                == QPlatformSurfaceEvent::SurfaceAboutToBeDestroyed)
-            {
-                m_renderer.Shutdown();
-            }
-            break;
-
-        default:
-            break;
-        }
-
-        return QWindow::event(event);
+        return nullptr;
     }
 
-    void DX12ViewportWindow::exposeEvent(QExposeEvent* event)
+    void DX12ViewportWindow::showEvent(QShowEvent* event)
     {
-        QWindow::exposeEvent(event);
-
-        if (isExposed())
-        {
-            requestUpdate();
-        }
+        QWidget::showEvent(event);
+        update();
     }
 
     void DX12ViewportWindow::resizeEvent(QResizeEvent* event)
     {
-        QWindow::resizeEvent(event);
+        QWidget::resizeEvent(event);
 
         if (event->size().width() <= 0 || event->size().height() <= 0)
         {
@@ -67,9 +50,9 @@ namespace XYBEngine
         m_lastFailedWidth = 0;
         m_lastFailedHeight = 0;
 
-        if (isExposed())
+        if (isVisible())
         {
-            requestUpdate();
+            update();
         }
     }
 
@@ -80,15 +63,44 @@ namespace XYBEngine
             return true;
         }
 
-        const uint32 w = static_cast<uint32>(width());
-        const uint32 h = static_cast<uint32>(height());
-        if (w == 0 || h == 0)
+        if (!isVisible())
         {
             return false;
         }
 
-        const auto hwnd = reinterpret_cast<HWND>(winId());
-        if (!m_renderer.Initialize(hwnd, w, h))
+        const WId windowId = winId();
+        if (windowId == 0)
+        {
+            return false;
+        }
+
+        const auto hwnd = reinterpret_cast<HWND>(windowId);
+        if (!IsWindow(hwnd) || !IsWindowVisible(hwnd))
+        {
+            return false;
+        }
+
+        uint32 width = static_cast<uint32>(QWidget::width());
+        uint32 height = static_cast<uint32>(QWidget::height());
+
+        RECT clientRect = {};
+        if (GetClientRect(hwnd, &clientRect))
+        {
+            const LONG clientWidth = clientRect.right - clientRect.left;
+            const LONG clientHeight = clientRect.bottom - clientRect.top;
+            if (clientWidth > 0 && clientHeight > 0)
+            {
+                width = static_cast<uint32>(clientWidth);
+                height = static_cast<uint32>(clientHeight);
+            }
+        }
+
+        if (width == 0 || height == 0)
+        {
+            return false;
+        }
+
+        if (!m_renderer.Initialize(hwnd, width, height))
         {
             XYB_LOG_ERROR("Failed to initialize DX12 viewport renderer");
             return false;
@@ -109,8 +121,8 @@ namespace XYBEngine
             return;
         }
 
-        uint32 width = static_cast<uint32>(QWindow::width());
-        uint32 height = static_cast<uint32>(QWindow::height());
+        uint32 width = static_cast<uint32>(QWidget::width());
+        uint32 height = static_cast<uint32>(QWidget::height());
         if (!m_renderer.GetClientSize(width, height))
         {
             return;
@@ -144,7 +156,7 @@ namespace XYBEngine
 
     void DX12ViewportWindow::renderFrame()
     {
-        if (!isExposed())
+        if (!isVisible())
         {
             return;
         }
@@ -158,14 +170,22 @@ namespace XYBEngine
 
         if (m_hasPendingResize || m_renderer.NeedsSwapChainResize())
         {
-            requestUpdate();
+            update();
             return;
         }
 
         m_renderer.Render();
 
-        // Qt 官方 RHI Window 示例：用 requestUpdate 驱动连续渲染，由平台 vsync 节流
-        requestUpdate();
+        if (m_renderer.IsInitialized())
+        {
+            update();
+        }
+    }
+
+    void DX12ViewportWindow::paintEvent(QPaintEvent* event)
+    {
+        Q_UNUSED(event);
+        renderFrame();
     }
 }
 

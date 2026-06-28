@@ -30,7 +30,6 @@ namespace XYBEngine
     private:
         Ui::QtSceneViewportPanel *ui;
         DX12ViewportWindow* m_viewportWindow = nullptr;
-        QWidget* m_viewportContainer = nullptr;
     };
 
     void QtSceneViewportPanelResiter();

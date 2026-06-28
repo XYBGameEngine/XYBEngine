@@ -4,24 +4,26 @@
 
 #include "DX12TriangleRenderer.h"
 
-#include <QWindow>
+#include <QWidget>
 
-class QExposeEvent;
+class QPaintEvent;
 class QResizeEvent;
+class QShowEvent;
 
 namespace XYBEngine
 {
-    /** DX12 视口窗口，遵循 Qt RHI/OpenGL Window 示例的 requestUpdate 渲染循环 */
-    class DX12ViewportWindow final : public QWindow
+    /** DX12 视口控件，使用原生 HWND + WA_PaintOnScreen 嵌入 Qt 面板 */
+    class DX12ViewportWindow final : public QWidget
     {
     public:
-        explicit DX12ViewportWindow(QWindow* parent = nullptr);
+        explicit DX12ViewportWindow(QWidget* parent = nullptr);
         ~DX12ViewportWindow() override;
 
     protected:
-        bool event(QEvent* event) override;
-        void exposeEvent(QExposeEvent* event) override;
+        QPaintEngine* paintEngine() const override;
+        void showEvent(QShowEvent* event) override;
         void resizeEvent(QResizeEvent* event) override;
+        void paintEvent(QPaintEvent* event) override;
 
     private:
         bool tryInitialize();
