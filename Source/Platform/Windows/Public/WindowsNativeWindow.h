@@ -6,7 +6,7 @@
 
 namespace XYBEngine
 {
-    class WindowsNativeWindow : public INativeWindow
+    class XYB_API WindowsNativeWindow : public INativeWindow
     {
         private:
             uint32 m_width = 0;
@@ -19,7 +19,7 @@ namespace XYBEngine
 
             uint32 GetWidth() override;
             uint32 GetHeight() override;
-            
+
             void Create(NativeWindowHandle nativeWindowHandle) override;
             void Resize(uint32 width, uint32 height) override;
             NativeWindowHandle GetNativeWindow() override;

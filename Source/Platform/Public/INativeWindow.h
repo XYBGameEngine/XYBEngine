@@ -23,7 +23,7 @@ namespace XYBEngine
         void* layer;
     };
 
-    class INativeWindow
+    class XYB_API INativeWindow
     {
     public:
         virtual ~INativeWindow() = default;

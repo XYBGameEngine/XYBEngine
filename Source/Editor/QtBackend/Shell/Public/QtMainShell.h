@@ -22,7 +22,7 @@ namespace XYBEngine
      *
      * 多重继承 QMainWindow 与 IEditorShell，启动时由 EditorLauncher 注册并 Show。
      */
-    class QtMainShell : public QMainWindow, public IEditorShell
+    class XYB_API QtMainShell : public QMainWindow, public IEditorShell
     {
         Q_OBJECT
 

@@ -13,7 +13,7 @@ namespace XYBEngine
 {
     class DX12ViewportWindow;
 
-    class QtSceneViewportPanel : public QWidget, public IEditorPanel
+    class XYB_API QtSceneViewportPanel : public QWidget, public IEditorPanel
     {
         Q_OBJECT
 

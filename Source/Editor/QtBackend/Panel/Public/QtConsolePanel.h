@@ -19,7 +19,7 @@ class QtConsolePanel;
 namespace XYBEngine
 {
     /** Qt 控制台窗口，实现 IEditorPanel 接口，布局由 QtConsolePanel.ui 定义 */
-    class QtConsolePanel : public QWidget, public IEditorPanel
+    class XYB_API QtConsolePanel : public QWidget, public IEditorPanel
     {
         Q_OBJECT
 
