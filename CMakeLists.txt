@@ -18,6 +18,7 @@ set(RESOURCE_FILES ${PROJECT_SOURCE_DIR}/UIResource/Resource.qrc)
 
 add_subdirectory(ThirdParty/SPDLog)
 add_subdirectory(Source/Core) 
+add_subdirectory(Source/Platform) 
 add_subdirectory(Source/Editor) 
 
 message("-----------开始构建 XYBEngine 主项目 FirstDemo------------")
@@ -32,6 +33,7 @@ set_target_properties(XYBGame PROPERTIES AUTORCC ON)
 
 target_link_libraries(XYBGame PRIVATE 
     XYBCore 
+    XYBPlatform
     -Wl,--whole-archive XYBEditor -Wl,--no-whole-archive
 )
 
