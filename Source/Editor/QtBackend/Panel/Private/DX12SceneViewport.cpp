@@ -105,7 +105,7 @@
         if(!CheckFailed(hr, "Failed to create D3D12 command queue")){ 
             return;
         }
-        
+
         DXGI_SWAP_CHAIN_DESC1 swapChainDesc = {};
         swapChainDesc.BufferCount = 2;
         swapChainDesc.Width = width();
@@ -134,12 +134,15 @@
         }
 
 
-         hr = m_device->CreateCommandAllocator(
+        hr = m_device->CreateCommandAllocator(
             D3D12_COMMAND_LIST_TYPE_DIRECT,
              IID_PPV_ARGS(m_commandAllocator.GetAddressOf())
             );
         if(!CheckFailed(hr, "Failed to create D3D12 command allocator")){
             return;
         }
+
+
+
     }
  }
