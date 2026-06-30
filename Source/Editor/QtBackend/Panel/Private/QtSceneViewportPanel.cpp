@@ -3,7 +3,7 @@
 #include "ui_QtSceneViewportPanel.h"
 
 #ifdef _WIN32
-#include "DX12ViewportWindow.h"
+#include "DX12SceneViewport.h"
 #include <QVBoxLayout>
 #endif
 
@@ -31,7 +31,7 @@ namespace XYBEngine
         ui->setupUi(this);
 
 #ifdef _WIN32  
-        m_viewportWindow = new DX12ViewportWindow(this);
+        m_viewportWindow = new DX12SceneViewport(this);
         m_viewportWindow->setFocusPolicy(Qt::StrongFocus);
         ui->UI_ViewportLayout->layout()->addWidget(m_viewportWindow);
 #else
