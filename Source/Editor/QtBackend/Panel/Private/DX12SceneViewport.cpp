@@ -1,6 +1,4 @@
-#include "DX12SceneViewport.h"
-
-#include "Log.h"
+#include "DX12SceneViewport.h"      
 
  namespace XYBEngine
  {
@@ -17,12 +15,18 @@
             InitDX12();
             m_isInit = true;
         }
+
+        if(m_isInit==true){ 
+            m_timer = new QTimer(this);
+            connect(m_timer, &QTimer::timeout, this, &DX12SceneViewport::FrameRender);
+            m_timer->start(16);
+        }
     }
     
     DX12SceneViewport::~DX12SceneViewport()
     { 
     } 
-    
+
     QPaintEngine* DX12SceneViewport::paintEngine() const
     {
         return nullptr;
@@ -51,6 +55,20 @@
 
     void DX12SceneViewport::FrameRender()
     {
+        UINT dxgiFactoryFlags = 0;
 
+        ComPtr<ID3D12Debug> debugController;
+        if(SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController)))){
+            debugController->EnableDebugLayer(); 
+            dxgiFactoryFlags |= DXGI_CREATE_FACTORY_DEBUG;
+        }
+
+        ComPtr<IDXGIFactory4> factory;
+
+        HRESULT hr = CreateDXGIFactory2(dxgiFactoryFlags, IID_PPV_ARGS(factory.GetAddressOf()));
+        if(FAILED(hr)){
+            XYB_LOG_ERROR("Failed to create DXGI factory");
+            return;
+        } 
     }
  }
