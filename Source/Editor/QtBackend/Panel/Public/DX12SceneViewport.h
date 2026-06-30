@@ -38,6 +38,17 @@ namespace XYBEngine
 
             void InitDX12();
             void FrameRender();
+            bool CheckFailed(HRESULT hr, const char* message);
+
+            ComPtr<ID3D12Device> m_device;
+            ComPtr<IDXGIFactory4> m_factory;
+            ComPtr<IDXGISwapChain3> m_swapChain;
+            ComPtr<ID3D12CommandQueue> m_commandQueue;
+            ComPtr<ID3D12CommandAllocator> m_commandAllocator;
+            ComPtr<ID3D12GraphicsCommandList> m_commandList;
+            ComPtr<ID3D12DescriptorHeap> m_rtvHeap;
+            ComPtr<ID3D12Resource> m_renderTargets[2];
+            ComPtr<ID3D12RootSignature> m_rootSignature;
     };
 }
 
